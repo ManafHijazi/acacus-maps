@@ -7,7 +7,7 @@ To get started with this application, follow the steps below:
 #### Clone and run this repository to your local machine
 
 ** Install dependencies by running npm install
-**[IMPORTANT]\*\* Run the application using npm-run-all --parallel start node
+***[IMPORTANT]*** Run the application using npm-run-all --parallel start node
 
 #### Dependencies
 
