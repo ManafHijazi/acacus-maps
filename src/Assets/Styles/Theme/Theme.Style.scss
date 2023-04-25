@@ -31,7 +31,6 @@ body {
   }
 
   &.is-dark-mode {
-
     .home-views-wrapper,
     .MuiPaper-root,
     .side-extended-wrapper,
@@ -60,7 +59,7 @@ hr {
 }
 
 .MuiBackdrop-root {
-  backdrop-filter: saturate(180%) blur(5px);
+  backdrop-filter: saturate(120%) blur(5px);
   background-color: #00000017 !important;
 }
 

@@ -58,13 +58,15 @@ export const SelectComponent = ({
         (startAdornment && ' with-start-andorment') || ''
       }${value && (!emptyItem || value !== emptyItem.value) ? ' select-filled' : ''}${
         ((overInputText || overInputTextIcon) && ' over-input-text-wrapper') || ''
-      }`}>
+      }`}
+    >
       {labelValue && (
         <div className='labels-wrapper'>
           {labelValue && (
             <label
               htmlFor={idRef}
-              className={`label-wrapper ${labelClasses}${isDisabled ? ' disabled' : ''}`}>
+              className={`label-wrapper ${labelClasses}${isDisabled ? ' disabled' : ''}`}
+            >
               {labelValue}
             </label>
           )}
@@ -133,12 +135,14 @@ export const SelectComponent = ({
               }`}
             />
           )}
-          inputProps={{ readOnly: false }}>
+          inputProps={{ readOnly: false }}
+        >
           {emptyItem && (
             <MenuItem
               style={emptyItem.isHiddenOnOpen ? { display: 'none' } : {}}
               value={emptyItem.value}
-              disabled={emptyItem.isDisabled}>
+              disabled={emptyItem.isDisabled}
+            >
               {emptyItem.text}
             </MenuItem>
           )}
@@ -146,7 +150,8 @@ export const SelectComponent = ({
             <MenuItem
               style={selectAllItem.isHiddenOnOpen ? { display: 'none' } : {}}
               value={selectAllItem.value}
-              disabled={selectAllItem.isDisabled}>
+              disabled={selectAllItem.isDisabled}
+            >
               {isWithCheckAll && (
                 <CheckboxesComponent
                   idRef={`${idRef}allCheckbox`}
@@ -161,7 +166,8 @@ export const SelectComponent = ({
             <MenuItem
               style={item.isHiddenOnOpen ? { display: 'none' } : {}}
               value={valueInput ? item[valueInput] : item}
-              key={keyLoopBy && keyValue ? keyValue + item[keyLoopBy] : `selection${index + 1}`}>
+              key={keyLoopBy && keyValue ? keyValue + item[keyLoopBy] : `selection${index + 1}`}
+            >
               {getIsChecked && (
                 <CheckboxesComponent
                   idRef={`${idRef}Checkbox${index + 1}`}
@@ -169,12 +175,7 @@ export const SelectComponent = ({
                   singleIndeterminate={(getIsIndeterminate && getIsIndeterminate(item)) || false}
                 />
               )}
-              <span className='menu-item-first-char'>
-                {`${(textInput ? item[textInput] : item).slice(0, 1)}`}
-              </span>
-              <span className='menu-item-text'>
-                {`${(textInput ? item[textInput] : item).slice(1)}`}
-              </span>
+              <span className='menu-item-text'>{`${textInput ? item[textInput] : item}`}</span>
             </MenuItem>
           ))}
         </Select>

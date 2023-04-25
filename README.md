@@ -1,15 +1,13 @@
 Welcome to Acacus Maps!
 
-This is a React application built to [describe the purpose of your application].
-
 #### Getting Started
 
 To get started with this application, follow the steps below:
 
-#### Clone this repository to your local machine
+#### Clone and run this repository to your local machine
 
-Install dependencies by running npm install
-Run the application using npm start
+** Install dependencies by running npm install
+**[IMPORTANT]\*\* Run the application using npm-run-all --parallel start node
 
 #### Dependencies
 

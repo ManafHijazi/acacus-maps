@@ -134,11 +134,7 @@ const LoginView = () => {
             />
           </div>
           <div className='login-button-wrapper'>
-            <ButtonBase
-              id='loginSigninBtnId'
-              disabled={isLoginLoading || !state.user_id || !state.password}
-              onClick={handleLogin}
-            >
+            <ButtonBase id='loginSigninBtnId' onClick={handleLogin}>
               {isLoginLoading ? 'Signing in ...' : 'Sign in'}
             </ButtonBase>
           </div>

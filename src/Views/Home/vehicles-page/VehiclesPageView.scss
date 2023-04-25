@@ -1,0 +1,14 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.vehicles-wrapper {
+  padding: 1rem;
+  background-color: white;
+  box-shadow: $bs-primary;
+  overflow: hidden;
+  position: relative;
+
+  .search-wrapper {
+    padding: 1rem;
+    width: 40%;
+  }
+}

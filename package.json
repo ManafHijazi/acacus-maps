@@ -16,8 +16,14 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "google-maps-react": "^2.0.6",
     "hserve": "^0.1.2",
+    "http-proxy-middleware": "^2.0.6",
+    "i18next": "^22.4.15",
     "moment": "^2.29.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -33,6 +39,7 @@
   },
   "scripts": {
     "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "node": "cd mycorsproxy && nodemon app.js",
     "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -120,6 +127,7 @@
     "eslint-plugin-autofix": "^1.1.0",
     "eslint-plugin-react": "^7.31.11",
     "faker": "^5.5.3",
+    "npm-run-all": "^4.1.5",
     "prettier": "2.8.1",
     "sass": "^1.54.9"
   }

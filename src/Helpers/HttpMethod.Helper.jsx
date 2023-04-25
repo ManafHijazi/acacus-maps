@@ -23,7 +23,7 @@ const renderByStatusCode = (statusCode) => {
 const allPendingRequestsRecord = [];
 const getUniqueId = (config) => `url=${config.url}&method=${config.method}`;
 
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 axios.interceptors.request.use(
   (configurations) => {
@@ -33,13 +33,13 @@ axios.interceptors.request.use(
       allPendingRequestsRecord.push({ id: getUniqueId(configurations), cancel });
     });
 
-    configurationsLocal.withCredentials = true;
+    configurationsLocal.withCredentials = false;
 
     return configurationsLocal;
   },
   (error) => {
     Promise.reject(error);
-  }
+  },
 );
 
 export const removeAllPendingRequestsRecordHttp = () => {
@@ -67,7 +67,7 @@ axios.interceptors.response.use(
 
     renderByStatusCode(status);
     return Promise.reject(error);
-  }
+  },
 );
 
 export const HttpServices = {
