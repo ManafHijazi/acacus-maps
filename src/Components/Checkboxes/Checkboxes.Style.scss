@@ -27,17 +27,16 @@
   .checkbox-wrapper {
     .MuiSvgIcon-root {
       path {
-        fill: $c-primary;
+        fill: $c-primary-dark;
       }
     }
 
     &.Mui-checked,
     &.MuiCheckbox-indeterminate {
-
       .mdi,
       .fas {
         color: $c-white;
-        background-color: $c-primary;
+        background-color: $c-primary-dark;
       }
     }
 
@@ -58,7 +57,7 @@
     .i-unchecked {
       height: 19px;
       width: 19px;
-      border: 2px solid $c-primary;
+      border: 2px solid $c-primary-dark;
       border-radius: 0.25rem;
     }
 
@@ -75,20 +74,19 @@
     .checkbox-wrapper {
       .MuiSvgIcon-root {
         path {
-          fill: $c-primary;
+          fill: $c-primary-dark;
         }
       }
 
       .i-unchecked {
-        border-color: $c-primary;
+        border-color: $c-primary-dark;
       }
 
       &.Mui-checked,
       &.MuiCheckbox-indeterminate {
-
         .mdi,
         .fas {
-          background-color: $c-primary;
+          background-color: $c-primary-dark;
         }
       }
     }
@@ -98,16 +96,15 @@
     .checkbox-wrapper {
       .MuiSvgIcon-root {
         path {
-          fill: $c-primary;
+          fill: $c-primary-dark;
         }
       }
 
       &.Mui-checked,
       &.MuiCheckbox-indeterminate {
-
         .mdi,
         .fas {
-          background-color: $c-primary;
+          background-color: $c-primary-dark;
         }
       }
     }
@@ -127,7 +124,6 @@
 
       &.Mui-checked,
       &.MuiCheckbox-indeterminate {
-
         .mdi,
         .fas {
           background-color: $c-blue-light;
@@ -144,6 +140,6 @@
 
   .form-control-label.MuiFormControlLabel-root .MuiFormControlLabel-label {
     font-size: 14px;
-    color: $c-primary;
+    color: $c-primary-dark;
   }
 }

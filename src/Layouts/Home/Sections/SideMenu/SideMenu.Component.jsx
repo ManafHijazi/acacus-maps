@@ -20,7 +20,7 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
 
   const logoutHandler = async () => {
     removeAllPendingRequestsRecordHttp();
-    LoginActions.logout();
+    // LoginActions.logout();
     storageService.clearLocalStorage();
 
     setTimeout(() => {
@@ -64,7 +64,8 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
           <div
             id='nav-icon'
             className={`${isSideMenuOpen ? 'open' : ''}`}
-            onClick={handleSideMenuOpenClose}>
+            onClick={handleSideMenuOpenClose}
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -72,7 +73,7 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
             <span></span>
             <span></span>
           </div>
-          <div className='side-menu-title'>SDTS</div>
+          <div className='side-menu-title'>Acacus</div>
         </div>
 
         <div className='side-menu-title-wrapper'></div>
@@ -82,7 +83,8 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
             {HomeRoutes.filter((item) => !item.isHidden).map((item, index) => (
               <div
                 key={`side-menu-item-${item.id}-${index + 1}`}
-                className={`side-menu-item ${isRouteActive(item.path) ? 'is-active' : ''}`}>
+                className={`side-menu-item ${isRouteActive(item.path) ? 'is-active' : ''}`}
+              >
                 <Tooltip title={`${isSideMenuOpen ? '' : item.name}`} placement='right'>
                   <Accordion
                     onClick={() => GlobalHistory.push(`${item.layout}${item.path}`)}
@@ -92,9 +94,11 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
                       expanded === item.id &&
                       item.children.length > 0
                     }
-                    onChange={handleChange(item.id)}>
+                    onChange={handleChange(item.id)}
+                  >
                     <AccordionSummary
-                      expandIcon={item.children.length === 0 ? <></> : <ExpandMoreIcon />}>
+                      expandIcon={item.children.length === 0 ? <></> : <ExpandMoreIcon />}
+                    >
                       <div className='item-info'>
                         <span className={`mdi mdi-${item.icon}`} />
                         <div className='item-name'>{item.name}</div>
@@ -113,7 +117,8 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
                                 event.stopPropagation();
 
                                 GlobalHistory.push(`${el.layout}${el.path}`);
-                              }}>
+                              }}
+                            >
                               <span className={`mdi mdi-${el.icon}`} />
                               <div className='subitem-name'>{el.name}</div>
                             </ButtonBase>

@@ -54,9 +54,9 @@ export const HeaderComponent = () => {
   return (
     <div className='header-wrapper'>
       <div>
-        <div className='header-title'>Welcome to SDTS</div>
+        <div className='header-title'>Welcome to Acacus Maps</div>
         <div className='header-subtitle'>
-          Hi, {`${userState.first_name} ${userState.last_name} Welcome back`}
+          Hi, {userState && `${userState.first_name} ${userState.last_name} Welcome back`}
         </div>
       </div>
 
@@ -81,7 +81,8 @@ export const HeaderComponent = () => {
           <ButtonBase id='headerUserMenuBtn' onClick={() => {}}>
             <Avatar
               className='avatars-wrapper theme-small'
-              src={userState && userState.profile_picture}>
+              src={userState && userState.profile_picture}
+            >
               <span className='pt-1'>
                 {userState &&
                   `${userState.first_name} ${userState.last_name}`.match(FirstLettersExp)}

@@ -1,8 +1,6 @@
 import loadable from '@loadable/component';
 
-const MapPageView = loadable(() =>
-  import('../../../Views/Home/map-page/MapPageView')
-);
+const MapPageView = loadable(() => import('../../../Views/Home/map-page/MapPageView'));
 
 const HomeRoutes = [
   {

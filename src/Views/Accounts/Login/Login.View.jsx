@@ -55,11 +55,7 @@ const LoginView = () => {
       localStorage.setItem('isLoggedIn', JSON.stringify(true));
       setIsLoginLoading(false);
 
-      if (userObject && userObject.first_login) {
-        GlobalHistory.push('/accounts/change-password');
-      } else {
-        GlobalHistory.push('/home/dashboard-page');
-      }
+      GlobalHistory.push('/home/map-page');
     } else {
       if (response && response.data) {
         showError(
@@ -69,7 +65,7 @@ const LoginView = () => {
             response.data.map((item, index) => (
               <div key={`${index + 1}-error`}>{`- ${item}`}</div>
             ))) ||
-            'Login Failed'
+            'Login Failed',
         );
         setIsLoginLoading(false);
       }
@@ -79,7 +75,7 @@ const LoginView = () => {
   return (
     <div className='login-wrapper'>
       <div className='login-wrapper-card'>
-        <div className='card-title'>SDTS</div>
+        <div className='card-title'>Acacus Maps</div>
         <div className='card-subtitle'>Please login to start using the system</div>
         <div className='login-card-body'>
           <Inputs
@@ -117,7 +113,8 @@ const LoginView = () => {
               <ButtonBase
                 id='loginShowPasswordBtnId'
                 className='btns-icon mx-2 theme-transparent'
-                onClick={() => setIsShowPassword((items) => !items)}>
+                onClick={() => setIsShowPassword((items) => !items)}
+              >
                 <span
                   className={`c-gray-primary  mdi mdi-${
                     (isShowPassword && 'eye-off') || 'eye'
@@ -140,7 +137,8 @@ const LoginView = () => {
             <ButtonBase
               id='loginSigninBtnId'
               disabled={isLoginLoading || !state.user_id || !state.password}
-              onClick={handleLogin}>
+              onClick={handleLogin}
+            >
               {isLoginLoading ? 'Signing in ...' : 'Sign in'}
             </ButtonBase>
           </div>

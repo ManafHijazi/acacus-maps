@@ -16,11 +16,10 @@
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
-  background: $bg-gradient-primary,
-    url('https://d12eu00glpdtk2.cloudfront.net/public/images/local/al-khebra-driving-academy-qatar.jpg');
+  background: url('https://lh3.googleusercontent.com/p/AF1QipNajzhtrTQR6RF-byGjFEdlYkJlEqAz9oosCgPv=s1360-w1360-h1020');
 
   .login-wrapper-card {
-    background-color: rgba(255, 255, 255, 0.641);
+    background-color: #ffc15c60;
     backdrop-filter: saturate(180%) blur(1rem);
     min-width: 25%;
     height: 100vh;
@@ -38,7 +37,7 @@
 
     .card-title {
       padding-left: 4rem;
-      color: $c-primary;
+      color: $c-primary-dark;
       font-weight: bold;
       font-family: $ff-bold;
       font-size: 26px;
@@ -108,7 +107,7 @@
       .MuiButtonBase-root {
         width: 100%;
         padding: 0.8rem;
-        background-color: $c-primary;
+        background-color: $c-primary-dark;
         color: $c-white;
         text-transform: capitalize;
         border-radius: 0.5rem;
