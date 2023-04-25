@@ -1,0 +1,20 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.date-picker-wrapper {
+  .MuiFormControl-root {
+    width: 100%;
+  }
+  .MuiInputBase-root {
+    font-size: 14px;
+    color: $c-gray-primary;
+    background-color: $c-gray-light;
+    height: 2.5rem;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: 0 solid transparent !important;
+  }
+  .MuiFormLabel-root {
+    font-size: 14px;
+    margin-top: -0.4rem;
+  }
+}

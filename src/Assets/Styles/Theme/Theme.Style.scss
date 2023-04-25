@@ -1,0 +1,221 @@
+// ======================================================== Start Custom Themes
+@import './Utilities/Buttons.Style.scss';
+@import './Utilities/Scrollbar.Style.scss';
+@import './Utilities/Switches.Style.scss';
+@import './Utilities/Fonts.Style.scss';
+
+// ======================================================== End Custom Themes
+//========================================================= Start Main Tags Override
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  outline: 0 !important;
+}
+
+body {
+  background-color: #fefeff;
+  font-size: $fz-default;
+  font-family: $ff-default !important;
+  color: $c-gray-primary;
+  min-width: 320px;
+  margin: 0;
+  font-weight: $fw-normal;
+
+  &.rtl {
+    text-align: right;
+    font-family: $ff-default-rtl !important;
+  }
+
+  &.is-dark-mode {
+
+    .home-views-wrapper,
+    .MuiPaper-root,
+    .side-extended-wrapper,
+    .MuiCollapse-root {
+      filter: invert(1);
+
+      video,
+      img {
+        filter: invert(1);
+      }
+
+      .MuiCollapse-root {
+        filter: invert(0);
+      }
+    }
+  }
+}
+
+hr {
+  border-top-color: rgba(231, 231, 231, 0.46) !important;
+  margin: 1.5rem 0.5rem;
+}
+
+.react-toast-notifications__container {
+  z-index: 1350 !important;
+}
+
+.MuiBackdrop-root {
+  backdrop-filter: saturate(180%) blur(5px);
+  background-color: #00000017 !important;
+}
+
+@include rtl-in {
+  .MuiPickersCalendarHeader-iconButton {
+    .MuiSvgIcon-root {
+      transform: scale(-1);
+    }
+  }
+}
+
+label {
+  margin-bottom: 0;
+}
+
+p,
+label {
+  font-weight: 300;
+}
+
+#root {
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+// ========================================================= End Main Tags Override
+// ======================================================== Start Global Override
+.MuiTypography-body1,
+.MuiButtonBase-root,
+.MuiFormControl-root,
+.MuiSelect-root,
+.autocomplete,
+.MuiFormLabel-root,
+.MuiChip-label,
+.MuiInputBase-input,
+.MuiTableCell-root,
+.MuiTypography-root {
+  font-family: $ff-default !important;
+  font-size: $fz-default;
+}
+
+.mdi {
+  line-height: 100%;
+
+  &:before {
+    line-height: 100%;
+    font-size: $fz-19px;
+  }
+
+  &.mdi-chevron-right,
+  &.mdi-chevron-left,
+  &.mdi-menu-right,
+  &.mdi-menu-left,
+  &.mdi-arrow-left,
+  &.mdi-arrow-right,
+  &.mdi-chevron-double-right {
+    @include rtl {
+      transform: scale(-1);
+    }
+  }
+
+  &.mdi-magnify {
+    @include rtl {
+      transform: rotateZ(90deg);
+    }
+  }
+}
+
+.MuiStepConnector-alternativeLabel {
+  @include rtl {
+    left: calc(50% + 20px) !important;
+    right: calc(-50% + 20px) !important;
+  }
+}
+
+.avatars-wrapper {
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: #f4f4f4;
+  color: #d9d9d9;
+  font-family: $ff-semibold;
+
+  &.theme-large {
+    width: 8rem !important;
+    height: 8rem !important;
+    font-size: 24px;
+  }
+
+  &.theme-menu {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+    font-size: 24px;
+  }
+
+  &.theme-small {
+    width: 2rem !important;
+    height: 2rem !important;
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+
+  &.theme-upload {
+    width: 3rem !important;
+    height: 3rem !important;
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+}
+
+.MuiAvatar-root {
+  background-color: #f4f4f4;
+  color: #d9d9d9;
+}
+
+.MuiTooltip-tooltip {
+  background: #1d1d1d !important;
+}
+
+// ======================================================== End Global Override
+// ======================================================== Start Global Views
+@import './Utilities/GlobalViews.Style.scss';
+// ======================================================== End Global Views
+// ======================================================== Start Icons
+@import './Utilities/Icons.Style.scss';
+// ======================================================== End Icons
+// ======================================================== Start Display
+@import './Utilities/Display.Style.scss';
+// ======================================================== End Display
+// ======================================================== Start Positions
+@import './Utilities/Positions.Style.scss';
+// ======================================================== End Positions
+// ======================================================== Start Borders
+@import './Utilities/Borders.Style.scss';
+// ======================================================== End Borders
+// ========================================================= Start Gradients Classes
+@import './Utilities/Gradients.Style.scss';
+// ========================================================= End Gradients Classes
+// ========================================================= Start Texts Classes
+@import './Utilities/Texts.Style.scss';
+// ========================================================= End Texts Classes
+// ======================================================== Start Font Sizes
+@include font-sizes;
+// ======================================================== End Font Sizes
+// ======================================================== Start Font Weights
+@include font-weights;
+// ======================================================== End Font Weights
+// ======================================================== Start Widths
+@include widths;
+// ======================================================== End Widths
+// ======================================================== Start Heights
+@include heights;
+// ======================================================== End Heights
+// ======================================================== Start Margins & Padding
+@include padding-marin-loop;
+// ======================================================== End Margins & Padding
+// ======================================================== Start Colors
+@include colors-loop;
+// ======================================================== End Colors

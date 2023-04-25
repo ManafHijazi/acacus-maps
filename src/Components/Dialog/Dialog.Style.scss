@@ -1,0 +1,171 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.dialog-wrapper.MuiDialog-root {
+  .close-btn-wrapper {
+    top: 0.5rem;
+  }
+
+  .MuiDialog-paper {
+    width: 100%;
+    border-radius: 1rem;
+
+    &.MuiDialog-paperWidthXl,
+    &.MuiDialog-paperWidthLg,
+    &.MuiDialog-paperWidthMd {
+      .dialog-content-wrapper {
+        min-height: 35vh;
+      }
+    }
+  }
+
+  .content-and-footer-wrapper {
+    @include d-flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .MuiDialogTitle-root {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    color: #535353;
+  }
+
+  .dialog-title-wrapper {
+    padding: 1rem;
+    color: $c-primary;
+    font-weight: bold;
+    font-family: $ff-extrabold;
+
+    .MuiTypography-root:not(.MuiStepLabel-label) {
+      padding: 0.5rem 0 0;
+      @include d-flex-v-center-h-between;
+    }
+
+    &.with-custom-title {
+      .close-btn-wrapper {
+        position: absolute;
+        top: 0.8rem;
+        right: 0.5rem;
+
+        @include rtl {
+          right: initial;
+          left: 0;
+        }
+      }
+    }
+
+    .dialog-title-text {
+      color: $c-primary;
+      font-size: 14px;
+      font-weight: $fw-bold;
+      padding: 0 1rem;
+      margin-bottom: 0.5rem;
+      font-family: $ff-extrabold;
+    }
+  }
+
+  .dialog-content-wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    .dialog-content {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      flex-wrap: wrap;
+
+      .dialog-filed {
+        width: 50%;
+        padding-bottom: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    &.is-large {
+      .dialog-content {
+        .dialog-filed {
+          width: 32%;
+        }
+      }
+    }
+
+    &:first-child {
+      padding-top: 0.5rem;
+    }
+  }
+
+  .dialog-footer-wrapper {
+    @include d-flex-column;
+
+    .cancel-wrapper,
+    .save-wrapper {
+      margin-bottom: 0.5rem;
+    }
+
+    &.MuiDialogActions-spacing > :not(:first-child) {
+      margin: 0 !important;
+    }
+
+    &.MuiDialogActions-root {
+      padding: 0;
+      margin-bottom: 0;
+
+      .dialog-pagination-wrapper {
+        padding: 1rem 1rem 0;
+
+        .dialog-pagination-content {
+          @include d-flex-center;
+          width: 100%;
+          padding: 0.5rem 0.5rem 0;
+          border-radius: 20px 20px 0 0 !important;
+          box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.29);
+        }
+      }
+
+      .next-previous-wrapper,
+      .save-cancel-wrapper {
+        @include d-flex-center;
+        flex-direction: row;
+        padding: 0.5rem;
+        padding-bottom: 1.5rem;
+
+        // .cancel-btn-wrapper,
+        // .save-btn-wrapper {
+        //    margin: 0 0.5rem;
+        // }
+        .save-btn-wrapper {
+          background-color: $c-green-primary;
+        }
+      }
+
+      .cancel-wrapper,
+      .save-wrapper {
+        @include d-inline-flex-center;
+      }
+
+      .save-cancel-wrapper,
+      .dialog-pagination-wrapper {
+        width: 100%;
+      }
+    }
+  }
+
+  &.is-old-theme {
+    .MuiDialog-paper {
+      border-radius: 0.4375rem;
+      padding: 1rem 1rem 0;
+
+      .dialog-title-wrapper {
+        .dialog-title-text {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

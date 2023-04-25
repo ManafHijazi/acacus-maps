@@ -1,0 +1,149 @@
+@import '../../Assets/Styles/Master.Style';
+
+.checkbox-groups-wrapper {
+  .PrivateSwitchBase-input-19 {
+    margin-top: 0;
+  }
+
+  .MuiFormControlLabel-root {
+    margin-bottom: 0;
+    margin-left: -11px;
+    margin-right: 0.5rem;
+
+    @include rtl {
+      margin-right: -11px;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .PrivateSwitchBase-input-4 {
+    margin-top: 0;
+  }
+
+  .PrivateSwitchBase-input-8 {
+    margin-top: 0;
+  }
+
+  .checkbox-wrapper {
+    .MuiSvgIcon-root {
+      path {
+        fill: $c-primary;
+      }
+    }
+
+    &.Mui-checked,
+    &.MuiCheckbox-indeterminate {
+
+      .mdi,
+      .fas {
+        color: $c-white;
+        background-color: $c-primary;
+      }
+    }
+
+    .mdi,
+    .fas {
+      height: 19px;
+      width: 19px;
+      border-radius: 0.3rem;
+      line-height: 13px;
+      padding: 0 !important;
+    }
+
+    .fas {
+      font-size: $fz-14px;
+      line-height: 19px;
+    }
+
+    .i-unchecked {
+      height: 19px;
+      width: 19px;
+      border: 2px solid $c-primary;
+      border-radius: 0.25rem;
+    }
+
+    .PrivateSwitchBase-root-5 {
+      padding: 0.5rem;
+    }
+
+    &.MuiIconButton-root {
+      border-radius: 0.3rem;
+    }
+  }
+
+  &.theme-default {
+    .checkbox-wrapper {
+      .MuiSvgIcon-root {
+        path {
+          fill: $c-primary;
+        }
+      }
+
+      .i-unchecked {
+        border-color: $c-primary;
+      }
+
+      &.Mui-checked,
+      &.MuiCheckbox-indeterminate {
+
+        .mdi,
+        .fas {
+          background-color: $c-primary;
+        }
+      }
+    }
+  }
+
+  &.theme-secondary {
+    .checkbox-wrapper {
+      .MuiSvgIcon-root {
+        path {
+          fill: $c-primary;
+        }
+      }
+
+      &.Mui-checked,
+      &.MuiCheckbox-indeterminate {
+
+        .mdi,
+        .fas {
+          background-color: $c-primary;
+        }
+      }
+    }
+  }
+
+  &.theme-secondary-light {
+    .MuiTypography-root {
+      color: $c-white;
+    }
+
+    .checkbox-wrapper {
+      .MuiSvgIcon-root {
+        path {
+          fill: $c-blue-light;
+        }
+      }
+
+      &.Mui-checked,
+      &.MuiCheckbox-indeterminate {
+
+        .mdi,
+        .fas {
+          background-color: $c-blue-light;
+        }
+      }
+    }
+  }
+
+  &.theme-dark {
+    .MuiFormControlLabel-label {
+      color: $c-white;
+    }
+  }
+
+  .form-control-label.MuiFormControlLabel-root .MuiFormControlLabel-label {
+    font-size: 14px;
+    color: $c-primary;
+  }
+}

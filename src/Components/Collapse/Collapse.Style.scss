@@ -1,0 +1,31 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+.collapse-wrapper {
+  &.is-absolute {
+    position: absolute;
+    right: 2rem;
+    z-index: 3;
+
+    @include phones-max() {
+      position: fixed;
+      right: 10px;
+      max-width: 300px;
+      margin-top: 15px;
+
+      @include rtl {
+        right: initial;
+        left: 10px;
+      }
+    }
+
+    @include rtl {
+      right: initial;
+      left: 0;
+    }
+
+    &.is-centered {
+      right: unset !important;
+      left: 50% !important;
+      transform: translateX(-50%);
+    }
+  }
+}

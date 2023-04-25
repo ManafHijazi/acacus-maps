@@ -1,0 +1,51 @@
+@import '../../Assets/Styles/Master.Style';
+
+.pagination-component-wrapper {
+  flex-wrap: wrap;
+  display: flex;
+  background-color: transparent !important;
+  &.is-reversed-section {
+    flex-direction: row-reverse;
+  }
+  @include tablets-max {
+    justify-content: center;
+  }
+  .pagination-section {
+    @include d-inline-flex-center;
+    .select-wrapper {
+      width: auto;
+      min-width: auto;
+      .selects {
+        min-height: 35px;
+      }
+      @include phones-s-max {
+        width: 100%;
+      }
+    }
+    .pages-text,
+    .details-wrapper,
+    .per-page-text,
+    .select-wrapper,
+    .btns-icon {
+      margin-bottom: 0.5rem;
+    }
+    flex-wrap: wrap;
+    color: $c-gray-primary;
+    .pagination-input {
+      max-width: 70px;
+      margin-bottom: 0.5rem;
+      @include phones-s-max {
+        max-width: initial;
+      }
+      .text-field-wrapper .inputs .MuiInputBase-input {
+        color: $c-secondary;
+        text-align: center;
+      }
+    }
+  }
+
+  .details-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}

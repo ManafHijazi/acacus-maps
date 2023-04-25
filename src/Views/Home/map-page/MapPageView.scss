@@ -1,0 +1,102 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.dashboard-wrapper {
+  .MuiMasonry-root {
+    padding-right: 2rem;
+  }
+
+  .charts-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+
+    .chart-item {
+      margin-right: 1rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .chart-item {
+    width: 33.3333%;
+    background-color: white;
+    box-shadow: $bs-primary;
+    padding: 1.5rem;
+    transition: all 0.18s ease-in-out;
+    border-radius: 1.5rem;
+    position: relative;
+
+    &.is-number {
+      width: 25%;
+    }
+
+    .mdi {
+      &::before {
+        font-size: 45px;
+        color: $c-primary;
+      }
+    }
+
+    .chart-actiion {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+
+      .mdi {
+        &::before {
+          font-size: 24px;
+          color: $c-gray-dark;
+        }
+      }
+    }
+
+    .chart-title {
+      font-size: 26px;
+      color: $c-primary-dark;
+      font-family: $ff-extrabold;
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+
+    .chart-body {
+      font-size: 16px;
+      color: $c-primary;
+      font-family: $ff-semibold;
+    }
+  }
+}
+
+.more-actions-popover-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+
+  .MuiButtonBase-root {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold !important;
+    font-family: $ff-semibold !important;
+
+    .mdi {
+      &::before {
+        font-size: 22px;
+        color: $c-primary;
+      }
+    }
+
+    &:hover {
+      background-color: #6373ff37;
+    }
+  }
+}
+
+.MuiPaper-root {
+  border-radius: 1rem !important;
+}

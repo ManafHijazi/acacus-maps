@@ -1,0 +1,14 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style';
+.table-label-view-wrapper{
+  @include d-inline-flex-center;
+  border-radius: .5rem;
+  padding: .25rem;
+  &.true-item{
+    color: $c-green-primary;
+    background-color: lighten($c-green-primary, 35%);
+  }
+  &.false-item{
+    color: $c-danger;
+    background-color: lighten($c-danger, 35%);
+  }
+}

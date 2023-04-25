@@ -1,0 +1,80 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.header-wrapper {
+  padding-bottom: 2rem;
+  padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .header-title {
+    font-size: 30px;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+    font-family: $ff-extrabold;
+    color: $c-primary-dark;
+  }
+
+  .header-subtitle {
+    font-size: 16px;
+    color: $c-gray-dark;
+    padding-left: 0.3rem;
+  }
+
+  .header-btns {
+    display: flex;
+    align-items: center;
+
+    .notifications-btn-wrapper {
+      padding-right: 1rem;
+
+      .MuiButtonBase-root {
+        box-shadow: $bs-primary;
+        border-radius: 1rem;
+        background-color: $c-white;
+        padding: 0.5rem;
+        color: $c-yellow !important;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
+      .mdi::before {
+        font-size: 1.5rem;
+      }
+    }
+
+    .cog-btn-wrapper {
+      padding-right: 1rem;
+
+      .MuiButtonBase-root {
+        box-shadow: $bs-primary;
+        border-radius: 1rem;
+        background-color: $c-white;
+        color: $c-info !important;
+        padding: 0.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
+      .mdi::before {
+        font-size: 1.5rem;
+      }
+    }
+
+    .user-profile-btn-wrapper {
+      .MuiButtonBase-root {
+        box-shadow: $bs-primary;
+        border-radius: 100%;
+        background-color: $c-white;
+        color: $c-primary;
+        padding: 0.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
+      .MuiAvatar-root {
+        background-color: $c-primary;
+      }
+    }
+  }
+}

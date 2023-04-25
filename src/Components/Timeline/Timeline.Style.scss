@@ -1,0 +1,15 @@
+@import '../../Assets/Styles/Master.Style';
+.timeline-wrapper {
+  .MuiTimelineDot-root {
+    @include d-inline-flex-center;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 0;
+    border: 0;
+  }
+  .MuiTimelineItem-missingOppositeContent {
+    &::before {
+      content: none;
+    }
+  }
+}

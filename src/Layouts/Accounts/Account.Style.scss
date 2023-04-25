@@ -1,0 +1,145 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.account-layout-wrapper {
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f8f8f8;
+}
+
+.login-wrapper {
+  height: 100vh;
+  min-height: 35rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  background: $bg-gradient-primary,
+    url('https://d12eu00glpdtk2.cloudfront.net/public/images/local/al-khebra-driving-academy-qatar.jpg');
+
+  .login-wrapper-card {
+    background-color: rgba(255, 255, 255, 0.641);
+    backdrop-filter: saturate(180%) blur(1rem);
+    min-width: 25%;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    &.is-change-password {
+      height: 28rem;
+      min-height: 28rem;
+    }
+
+    .card-title {
+      padding-left: 4rem;
+      color: $c-primary;
+      font-weight: bold;
+      font-family: $ff-bold;
+      font-size: 26px;
+      padding-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+      padding-left: 4rem;
+      color: $c-gray-darker;
+      font-size: 12px;
+      padding-bottom: 2rem;
+      max-width: 25rem;
+      text-align: center;
+    }
+
+    .login-actions-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 2rem;
+      padding-left: 0.5rem;
+
+      .MuiButtonBase-root {
+        font-size: 12px;
+        min-width: 0 !important;
+      }
+
+      .MuiFormControlLabel-label {
+        font-size: 12px;
+      }
+
+      @media (max-width: 425px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .login-card-body {
+      width: 100%;
+      padding-left: 4rem;
+      padding-right: 4rem;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .MuiInputLabel-root {
+        font-size: 12px;
+        color: $c-gray-dark;
+        padding-bottom: 0.2rem;
+      }
+
+      @media (max-width: 425px) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      @media (max-width: 320px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .login-button-wrapper {
+      width: 100%;
+
+      .MuiButtonBase-root {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: $c-primary;
+        color: $c-white;
+        text-transform: capitalize;
+        border-radius: 0.5rem;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: $ff-semibold;
+
+        &:disabled {
+          background-color: $c-gray;
+          color: $c-black-light;
+        }
+      }
+    }
+  }
+
+  .login-company-info-wrapper {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 28%;
+    min-width: 28%;
+
+    .MuiButtonBase-root {
+      min-width: 0 !important;
+    }
+
+    .h-divider {
+      width: 1px;
+      height: 1.5rem;
+      background-color: #ced0d2;
+    }
+  }
+}

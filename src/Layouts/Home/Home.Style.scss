@@ -1,0 +1,23 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.main-layout-wrapper {
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  .container-wrapper {
+    padding: 2rem;
+    min-height: 100vh;
+    width: 100%;
+    transition: all 0.18s ease-in-out;
+
+    &.is-open {
+      width: 87%;
+    }
+
+    .home-views-wrapper {
+      @include d-inline-flex;
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import '../../Assets/Styles/Helpers/Helpers.Style.scss';
+
+.no-data-result {
+  height: calc(100vh - 5rem);
+  @include d-flex-center;
+
+  .no-data-text {
+    height: 100%;
+    @include d-flex-center;
+    flex-wrap: wrap;
+    color: $c-primary;
+    font-size: 4rem;
+    font-weight: bolder;
+    font-family: $ff-default !important;
+    letter-spacing: 0px;
+  }
+
+  .no-data-result-subtitle {
+    color: $c-primary;
+    padding-left: 10px;
+    font-size: 22px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,82 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+.switch-component-wrapper {
+  @include d-flex;
+  width: 100%;
+  .switch-control-wrapper {
+    @include d-flex;
+    width: 100%;
+    input[type='checkbox'],
+    input[type='radio'] {
+      margin-top: 0 !important;
+    }
+    .Mui-disabled{
+      cursor: not-allowed;
+      .thumb-wrapper{
+        background-color: $c-gray-primary !important;
+      }
+    }
+    .labels-wrapper {
+      @include d-flex-v-center-h-between;
+      width: 100%;
+      .label-wrapper {
+        font-size: $fz-16px;
+        color: $c-black;
+        margin-bottom: 0.25rem;
+      }
+    }
+    .switch-control-label-wrapper {
+      margin: 0;
+      .MuiFormControlLabel-label {
+        font-size: $fz-16px;
+        color: $c-black;
+      }
+      .switch-control {
+        .switch-base-wrapper {
+          &.Mui-checked {
+            .MuiSwitch-thumb,
+            + .MuiSwitch-track {
+              background-color: $c-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.theme-default {
+    .switch-control-label-wrapper {
+      &.fw-simi-bold {
+        .MuiTypography-root {
+          font-weight: $fw-simi-bold !important;
+        }
+      }
+    }
+    &.is-flex-end {
+      justify-content: flex-end;
+      .switch-control-wrapper {
+        @include d-inline-flex;
+        width: initial;
+      }
+    }
+  }
+  &.theme-line {
+    @include d-flex-v-center;
+    flex-direction: row;
+    width: 100%;
+    .switch-control-label-wrapper {
+      &.fw-simi-bold {
+        .MuiTypography-root {
+          font-weight: $fw-simi-bold !important;
+        }
+      }
+      .switch-control {
+        .MuiSwitch-input {
+          left: 0;
+          position: absolute;
+          width: 0;
+          display: none;
+          height: 0;
+        }
+      }
+    }
+  }
+}

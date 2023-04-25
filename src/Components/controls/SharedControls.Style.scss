@@ -1,0 +1,31 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+.shared-control-wrapper {
+  &:not(.is-half-width):not(.is-quarter-width) {
+    //padding: 0 1rem;
+  }
+  &.is-half-width, &.is-quarter-width {
+    @include d-inline-flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  &.is-half-width {
+    padding: 0 .5rem;
+    width: 50%;
+    @include tablets-max {
+      width: 100%;
+    }
+  }
+  &.is-quarter-width {
+    padding: 0 .5rem;
+    width: 33.33333333%;
+    @include tablets-max {
+      width: 100%;
+    }
+    @include tablets-max {
+      width: 50%;
+    }
+    @include phones-max {
+      width: 100%;
+    }
+  }
+}

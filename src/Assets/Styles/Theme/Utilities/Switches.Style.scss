@@ -1,0 +1,18 @@
+.switches {
+  &.MuiSwitch-root {
+    padding: 0;
+    border-radius: 50px;
+    height: 22px;
+    width: 40px;
+    .MuiSwitch-switchBase {
+      padding: 0.15rem 0.15rem;
+      .MuiSwitch-thumb {
+        width: 18px;
+        height: 18px;
+      }
+      &.Mui-checked {
+        transform: translateX(18px);
+      }
+    }
+  }
+}

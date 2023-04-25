@@ -1,0 +1,78 @@
+@font-face {
+  font-family: Inter-Regular;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-Regular.ttf');
+}
+@font-face {
+  font-family: Inter-Black;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-Black.ttf');
+}
+@font-face {
+  font-family: Inter-Bold;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-Bold.ttf');
+}
+@font-face {
+  font-family: Inter-ExtraBold;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-ExtraBold.ttf');
+}
+@font-face {
+  font-family: Inter-ExtraLight;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-ExtraLight.ttf');
+}
+@font-face {
+  font-family: Inter-Light;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-Light.ttf');
+}
+@font-face {
+  font-family: Inter-Medium;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-Medium.ttf');
+}
+@font-face {
+  font-family: Inter-SemiBold;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-SemiBold.ttf');
+}
+@font-face {
+  font-family: Inter-Thin;
+  font-display: swap;
+  src: url('../../../../Fonts/Inter/Inter-Thin.ttf');
+}
+$fz-default: 12px;
+$fz-9px: 9px;
+$fz-10px: 10px;
+$fz-11px: 11px;
+$fz-12px: 12px;
+$fz-13px: 13px;
+$fz-14px: 14px;
+$fz-15px: 15px;
+$fz-16px: 16px;
+$fz-19px: 19px;
+$fz-20px: 20px;
+$fz-22px: 22px;
+$fz-24px: 24px;
+$fz-30px: 30px;
+$fz-40px: 40px;
+$fz-75px: 75px;
+$fz-table-header: 14px;
+$fz-table-body: 14px;
+$fz-table-footer: 12px;
+$fw-default: 400;
+$fw-normal: 400;
+$fw-medium: 500;
+$fw-simi-bold: 600;
+$fw-bold: 700;
+$fw-bolder: bolder;
+
+//============= Font Family =============
+
+$ff-default: Inter-Regular, 'Courier New', monospace;
+$ff-default-rtl: Inter-Regular;
+$ff-bold: Inter-Bold;
+$ff-extrabold: Inter-ExtraBold;
+$ff-semibold: Inter-SemiBold;

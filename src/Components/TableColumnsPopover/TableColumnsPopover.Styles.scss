@@ -1,0 +1,25 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.columns-popover-wrapper {
+  max-width: 25rem;
+
+  .table-columns-wrapper {
+    .table-columns-header {
+      @include d-flex-center;
+      padding: 0.5rem;
+      border-bottom: 1px solid $c-gray-light;
+    }
+
+    .table-columns-body {
+      .checkbox-groups-wrapper {
+        pointer-events: none;
+      }
+    }
+
+    .table-columns-footer {
+      @include d-flex-center;
+      padding: 0.5rem;
+      border-top: 1px solid $c-gray-light;
+    }
+  }
+}
