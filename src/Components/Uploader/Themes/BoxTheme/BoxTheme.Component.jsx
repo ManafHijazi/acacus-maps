@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { ButtonBase } from '@mui/material';
-import uploadIcon from '../../../../Assets/icons/Uploadicon.png';
+// import uploadIcon from '../../../../Assets/icons/Uploadicon.png';
 // import { LoadableImageComponant } from 'Components/LoadableImage/LoadableImage.Componant';
 import './BoxTheme.Style.scss';
 
@@ -51,7 +51,7 @@ export const BoxThemeComponent = memo(
         <div className='custom-dropzone-wrapper'>
           <div className='dropzone-items-wrapper'>
             <div className='dropzone-item-wrapper'>
-              <img src={uploadIcon} alt='upload icon' />
+              <img src='' alt='upload icon' />
               <div className='dropzone-title'>
                 Drag & drop files or
                 <span>
