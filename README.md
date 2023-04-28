@@ -8,7 +8,12 @@ To get started with this application, follow the steps below:
 
 ** Install dependencies by running npm install
 
-***[IMPORTANT]*** Run the application using npm-run-all --parallel start node
+***[IMPORTANT]*** Run the application using these steps:
+1 - npm i nodemon
+2 - cd mycorsproxy
+3 - nodemon app.js
+4 - cd ../
+5 - npm start
 
 #### Dependencies
 
