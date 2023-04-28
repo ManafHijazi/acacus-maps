@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { storageService } from '../utils';
-import { GlobalHistory } from './Middleware.Helper';
+import { GetGlobalTokenReducer, GlobalHistory } from './Middleware.Helper';
 
 const renderByStatusCode = (statusCode) => {
   switch (statusCode) {
@@ -32,6 +32,26 @@ axios.interceptors.request.use(
       // Add record, record the unique value of the request and cancel method
       allPendingRequestsRecord.push({ id: getUniqueId(configurations), cancel });
     });
+
+    const accessToken = localStorage.getItem('accessToken') || GetGlobalTokenReducer() || '';
+    const currentLanguage =
+      (localStorage.getItem('localization') &&
+        JSON.parse(localStorage.getItem('localization')).currentLanguage) ||
+      'en';
+
+    if (!configurationsLocal.headers.isPublic)
+      configurationsLocal.headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Accept-Language': currentLanguage,
+        Authorization: `${accessToken}`,
+      };
+    else
+      configurationsLocal.headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Accept-Language': currentLanguage,
+      };
 
     configurationsLocal.withCredentials = false;
 

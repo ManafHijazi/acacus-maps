@@ -7,6 +7,7 @@ export let GlobalHistory = null;
 export let GlobalLocation = null;
 let GlobalAccountReducer = null;
 let GlobalSocketeducer = null;
+let GlobalTokenReducer = null;
 export let GlobalFullAccess = false;
 export let GlobalToast = null;
 export const GlobalSearchDelay = 700;
@@ -46,6 +47,10 @@ export const getDataFromObject = (dataItem, key, isReturnAsIs) => {
   return a;
 };
 
+export const GetGlobalTokenReducer = () => GlobalTokenReducer;
+export const SetGlobalTokenReducer = (newValue) => {
+  GlobalTokenReducer = newValue;
+};
 export const SetGlobalRerender = (setRender, render) => {
   renderVar = render;
   setRenderVar = setRender;

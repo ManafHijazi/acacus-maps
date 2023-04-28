@@ -1,63 +1,63 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import { LoginService } from 'Services';
 import { ButtonBase } from '@mui/material';
-import { Inputs, CheckboxesComponent } from '../../../Components';
-import { GlobalHistory, SetGlobalSocketReducer } from '../../../Helpers';
 import { LoginActions } from 'Store/Actions';
+import { Inputs, CheckboxesComponent } from '../../../Components';
+import { GlobalHistory, SetGlobalTokenReducer } from '../../../Helpers';
 
 const LoginView = () => {
-  const endPoint = localStorage.getItem('endPoint') || '';
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(false);
+  const [token, setToken] = useState(null);
   const [state, setState] = useState({
-    user_id: '',
+    email: '',
     password: '',
   });
 
+  const getUserDetails = useCallback(() => {
+    if (token) {
+      const response = { data: true };
+
+      if (response) {
+        const data = {
+          email: 'm.jarwan@acacusgroup.com',
+          first_name: 'Mohammad',
+          is_deleted: false,
+          last_name: 'Jarwan',
+          profile_picture: '',
+          roles: [{ role_id: 1, role_name: 'SUPER_USER' }],
+          super_user: false,
+          user_id: 1,
+          user_name: 'mhijazi',
+        };
+
+        localStorage.setItem('user', JSON.stringify(data));
+
+        LoginActions.login(data);
+
+        GlobalHistory.push('/home/map-page');
+      }
+    }
+  }, [state, token]);
+
   const handleLogin = useCallback(async () => {
     setIsLoginLoading(true);
-    const response = true;
+
+    const response = await LoginService(state);
 
     if (response) {
-      const data = {
-        access_token: 'test_token',
-        email: 'manafhijazii@gmail.com',
-        first_login: false,
-        first_name: 'Manaf',
-        is_deleted: false,
-        last_name: 'Hijazi',
-        profile_picture: '',
-        roles: [{ role_id: 1, role_name: 'SUPER_USER' }],
-        super_user: false,
-        user_id: 1,
-        user_name: 'mhijazi',
-      };
+      const { data } = response;
 
-      localStorage.setItem('access_token', data.access_token);
-
-      let localEndPoint = endPoint;
-
-      if (endPoint.includes('https')) localEndPoint = endPoint.replace('https', 'wss');
-      else localEndPoint = endPoint.replace('http', 'wss');
-
-      // SetGlobalSocketReducer(
-      //   new WebSocket(`${localEndPoint}api/v1/products/ws?access_token=${data.access_token}`)
-      // );
-
-      let userObject = { ...data, access_token: '' };
-
-      if (userObject && userObject.super_user) {
-        userObject = { ...data, roles: [{ role_name: 'SUPER_USER' }] };
-      }
-
-      localStorage.setItem('user', JSON.stringify(userObject));
-      LoginActions.login(userObject);
+      setToken(data.accessToken);
+      localStorage.setItem('accessToken', data.accessToken);
+      SetGlobalTokenReducer(data.accessToken);
       localStorage.setItem('isLoggedIn', JSON.stringify(true));
-      setIsLoginLoading(false);
 
-      GlobalHistory.push('/home/map-page');
+      setIsLoginLoading(false);
     } else {
       if (response && response.data) {
+        setToken(null);
         showError(
           (response &&
             response.data &&
@@ -72,6 +72,23 @@ const LoginView = () => {
     }
   }, [state]);
 
+  useEffect(() => {
+    if (token) getUserDetails();
+  }, [getUserDetails, token]);
+
+  useEffect(() => {
+    if (
+      !localStorage.getItem('localization') ||
+      !JSON.parse(localStorage.getItem('localization')).currentLanguage
+    ) {
+      const language = {
+        currentLanguage: 'en',
+        isRtl: false,
+      };
+      localStorage.setItem('localization', JSON.stringify(language));
+    }
+  }, []);
+
   return (
     <div className='login-wrapper'>
       <div className='login-wrapper-card'>
@@ -80,15 +97,15 @@ const LoginView = () => {
         <div className='login-card-body'>
           <Inputs
             idRef='loginEmailInputId'
-            value={state.user_id}
+            value={state.email}
             wrapperClasses='mb-3'
             inputPlaceholder='Email'
             onInputChanged={(event) => {
               const { value } = event.target;
-              setState((items) => ({ ...items, user_id: value }));
+              setState((items) => ({ ...items, email: value }));
             }}
             onKeyUp={(event) => {
-              if (event.key === 'Enter' && state.password && state.user_id) handleLogin();
+              if (event.key === 'Enter' && state.password && state.email) handleLogin();
             }}
           />
           <Inputs
@@ -105,7 +122,7 @@ const LoginView = () => {
               if (event.key === 'Enter' && state.password && state.email) handleLogin();
             }}
             onKeyDown={(event) => {
-              if (event.key === 'Enter' && !isLoginLoading && state.user_id && state.password) {
+              if (event.key === 'Enter' && !isLoginLoading && state.email && state.password) {
                 handleLogin();
               }
             }}

@@ -7,6 +7,11 @@
   position: relative;
 }
 
+.map-render-wrapper {
+  width: 100%;
+  min-height: calc(100vh - 10rem);
+}
+
 .selected-marker-dialog-wrapper {
   .dialog-content {
     min-height: 20rem;

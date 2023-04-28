@@ -2,67 +2,108 @@ import React, { useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
 import { showError } from 'Helpers';
 import { DialogComponent } from 'Components';
+import { CircularProgress } from '@mui/material';
+import markerIcon from '../../../Assets/Images/marker.png';
 import teslaLogo from '../../../Assets/Images/tesla-logo.png';
-import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { GetAllVehicleTelemetriesService, GetVehicleTelemetriesByNameService } from 'Services';
 import './MapPageView.scss';
 
-const MapPageView = ({ google }) => {
-  const [points, setPoints] = useState([]);
+/**
+ * This component displays a Google Map with custom markers and allows users to click on a marker
+ * to get the marker info.
+ */
+const MapPageView = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [center, setCenter] = useState({ lat: 0, lng: 0 });
-
-  const getAllVehicleTelemetriesService = useCallback(async () => {
-    const response = await GetAllVehicleTelemetriesService({
-      key: process.env.React_APP_VEHICLE_TELEMETRIES,
-    });
-    if (response && response.status && response.status === 200 && response.data) {
-      const { telemetries } = response.data;
-
-      if (telemetries) {
-        const points = telemetries.map((item) => ({
-          lat: item.position.lat || 0,
-          lng: item.position.lng || 0,
-          name: item.name || '',
-        }));
-
-        setPoints(points);
-        setCenter(points[0]);
-      }
-    } else {
-      showError((response && response.data) || 'Failed to get vehicles');
-    }
-  }, []);
-
-  const getVehicleTelemetriesByNameService = useCallback(async (name) => {
-    const response = await GetVehicleTelemetriesByNameService({
-      key: process.env.React_APP_VEHICLE_TELEMETRIES,
-      name,
-    });
-    if (response && response.status && response.status === 200 && response.data) {
-      const { telemetry } = response.data;
-
-      if (telemetry) {
-        setActiveItem(telemetry);
-        setIsDialogOpen(true);
-      }
-    } else {
-      showError((response && response.data) || 'Failed to get marker info');
-      setActiveItem(null);
-      setIsDialogOpen(false);
-    }
-  }, []);
 
   const handleDialogClose = () => {
     setIsDialogOpen(false);
   };
 
-  const containerStyle = {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-  };
+  const getVehicleTelemetriesByNameService = useCallback(async (name) => {
+    setIsLoading(true);
+    setIsDialogOpen(true);
+
+    const response = await GetVehicleTelemetriesByNameService({
+      key: process.env.React_APP_VEHICLE_TELEMETRIES,
+      name,
+    });
+
+    if (response && response.status && response.status === 200 && response.data) {
+      const { telemetry } = response.data;
+
+      if (telemetry) setActiveItem(telemetry);
+    } else {
+      showError(
+        (response && response.data && response.data.message) || 'Failed to get marker info',
+      );
+      setActiveItem(null);
+      setIsDialogOpen(false);
+    }
+
+    setIsLoading(false);
+  }, []);
+
+  const getAllVehicleTelemetriesService = useCallback(async () => {
+    const response = await GetAllVehicleTelemetriesService({
+      key: process.env.React_APP_VEHICLE_TELEMETRIES,
+    });
+
+    let script = null;
+
+    if (response && response.status && response.status === 200 && response.data) {
+      const { telemetries } = response.data;
+
+      if (telemetries) {
+        // Load the Google Maps API script
+        script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.React_APP_GOOGLE_MAPS_API}&callback=onApiLoad`;
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        // Define the `onApiLoad` function globally so the Google Maps API can call it
+        window.onApiLoad = () => {
+          const newMap = new window.google.maps.Map(document.getElementById('map'), {
+            center: { lat: 25.774966, lng: 55.96579 },
+            zoom: 10,
+          });
+
+          if (newMap) {
+            const geocoder = new window.google.maps.Geocoder();
+
+            const points = telemetries.map((item) => ({
+              name: item.name || '',
+              position: item.position || { lat: 0, lng: 0 },
+              icon: { url: markerIcon, scaledSize: new window.google.maps.Size(150, 90) },
+            }));
+
+            points.map((marker) => {
+              const markerObj = new window.google.maps.Marker({
+                position: marker.position,
+                map: newMap,
+                icon: marker.icon,
+              });
+
+              markerObj.addListener('click', () => {
+                // When a marker is clicked, get its info
+                geocoder.geocode({ location: marker.position }, (results, status) => {
+                  if (status === 'OK' && results[0]) {
+                    getVehicleTelemetriesByNameService(marker.name);
+                  }
+                });
+              });
+            });
+          }
+        };
+      }
+    } else {
+      showError((response && response.data) || 'Failed to get vehicles');
+      document.body.removeChild(script);
+      delete window.onApiLoad;
+    }
+  }, []);
 
   useEffect(() => {
     getAllVehicleTelemetriesService();
@@ -70,19 +111,7 @@ const MapPageView = ({ google }) => {
 
   return (
     <div className='maps-wrapper view-wrapper'>
-      <Map zoom={10} google={google} center={center} containerStyle={containerStyle}>
-        {points &&
-          points.length > 0 &&
-          points.map((point, index) => (
-            <Marker
-              position={point}
-              name={point.name}
-              title={point.name}
-              key={`map-marker-${index + 1}`}
-              onClick={() => getVehicleTelemetriesByNameService(point.name)}
-            />
-          ))}
-      </Map>
+      <div id='map' className='map-render-wrapper' />
 
       <DialogComponent
         maxWidth='xs'
@@ -92,7 +121,7 @@ const MapPageView = ({ google }) => {
         dialogTitle={(activeItem && activeItem.name) || ''}
         dialogContent={
           <div className='dialog-content'>
-            {activeItem && (
+            {activeItem && !isLoading ? (
               <>
                 <div className='car-logo-wrapper'>
                   <img src={teslaLogo} alt='tesla car' />
@@ -158,6 +187,8 @@ const MapPageView = ({ google }) => {
                   </div>
                 </div>
               </>
+            ) : (
+              <CircularProgress />
             )}
           </div>
         }
@@ -166,6 +197,4 @@ const MapPageView = ({ google }) => {
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: process.env.React_APP_GOOGLE_MAPS_API,
-})(MapPageView);
+export default MapPageView;

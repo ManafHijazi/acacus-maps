@@ -17,8 +17,8 @@ const App = () => {
 
     axios.defaults.baseURL = endpointReducer;
 
-    if (localStorage.getItem('access_token')) {
-      const access_token = localStorage.getItem('access_token');
+    if (localStorage.getItem('accessToken')) {
+      const accessToken = localStorage.getItem('accessToken');
 
       let localEndPoint = endpointReducer;
 
@@ -26,7 +26,7 @@ const App = () => {
         localEndPoint = endpointReducer.replace('https', 'wss');
       else localEndPoint = endpointReducer.replace('http', 'wss');
 
-      const wsLink = `${localEndPoint}api/v1/products/ws?access_token=${access_token}`;
+      const wsLink = `${localEndPoint}api/v1/products/ws?accessToken=${accessToken}`;
 
       // SetGlobalSocketReducer(new WebSocket(wsLink));
     }

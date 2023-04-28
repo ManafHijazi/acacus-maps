@@ -1,6 +1,6 @@
 import { init, changeLanguage } from 'i18next';
-// import SharedEn from '../Assets/I18n/en.json';
-// import SharedAr from '../Assets/I18n/ar.json';
+import SharedEn from '../Assets/I18n/en.json';
+import SharedAr from '../Assets/I18n/ar.json';
 
 import { GlobalRerender } from './Middleware.Helper';
 
@@ -10,12 +10,12 @@ export const localizationInit = () => {
     fallbackLng: ['en', 'ar'],
     lng: 'en', // language to use
     resources: {
-      // en: {
-      //   Shared: SharedEn,
-      // },
-      // ar: {
-      //   Shared: SharedAr,
-      // },
+      en: {
+        Shared: SharedEn,
+      },
+      ar: {
+        Shared: SharedAr,
+      },
     },
   });
 

@@ -6,9 +6,9 @@ To get started with this application, follow the steps below:
 
 #### Clone and run this repository to your local machine
 
-** Install dependencies by running npm install
+\*\* Install dependencies by running npm install
 
-***[IMPORTANT]*** Run the application using these steps:
+**_[IMPORTANT]_** Run the application using these steps:
 1 - npm i nodemon
 2 - cd mycorsproxy
 3 - nodemon app.js

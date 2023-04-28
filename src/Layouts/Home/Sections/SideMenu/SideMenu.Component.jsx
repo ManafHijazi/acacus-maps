@@ -7,6 +7,7 @@ import { GlobalHistory } from '../../../../Helpers/Middleware.Helper';
 import { removeAllPendingRequestsRecordHttp, showError, showSuccess } from 'Helpers';
 import { Accordion, AccordionDetails, AccordionSummary, ButtonBase, Tooltip } from '@mui/material';
 import './SideMenu.Style.scss';
+import { LogoutService } from 'Services';
 
 export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOpenClose }) => {
   const location = useLocation();
@@ -20,19 +21,17 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
 
   const logoutHandler = async () => {
     removeAllPendingRequestsRecordHttp();
-    // LoginActions.logout();
+    LoginActions.logout();
     storageService.clearLocalStorage();
 
     setTimeout(() => {
       GlobalHistory.push('/accounts/login');
     }, 100);
 
-    const response = {};
+    const response = await LogoutService();
 
-    if (response && response.data && response.status === 200) {
-      const { data } = response;
-
-      showSuccess(data?.msg || 'Logged out Successfully');
+    if (response) {
+      showSuccess('Logged out Successfully');
 
       LoginActions.logout();
       storageService.clearLocalStorage();

@@ -2,7 +2,7 @@
  * Function that clears the Local Storage
  */
 const clearLocalStorage = () => {
-  const localStorageItems = ['user', 'isLoggedIn', 'endPoint', 'access_token'];
+  const localStorageItems = ['user', 'isLoggedIn', 'endPoint', 'accessToken'];
   localStorageItems.forEach((item) => {
     localStorage.removeItem(item);
   });
