@@ -85,6 +85,10 @@
         box-shadow: $bs-secondary;
         border-radius: 1rem;
 
+        @include themify($themes) {
+          box-shadow: themed('box-shadow');
+        }
+
         .MuiTableCell-head {
           background-color: $c-primary;
           position: sticky;
@@ -96,77 +100,37 @@
           z-index: 2 !important;
           width: 50px;
 
+          @include themify($themes) {
+            background-color: themed('table-head');
+          }
+
           &:first-child {
             border-top-left-radius: 1rem;
             border-bottom-left-radius: 1rem;
+
+            @include rtl {
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+              border-top-right-radius: 1rem;
+              border-bottom-right-radius: 1rem;
+            }
           }
           &:last-child {
             border-top-right-radius: 1rem;
             border-bottom-right-radius: 1rem;
+
+            @include rtl {
+              border-top-right-radius: 0;
+              border-bottom-right-radius: 0;
+              border-top-left-radius: 1rem;
+              border-bottom-left-radius: 1rem;
+            }
           }
 
           &.actions-cell,
           &.checkboxes-cell {
             font-size: 12px;
             text-align: center;
-          }
-        }
-      }
-    }
-
-    .MuiTableBody-root {
-      .MuiTableRow-root {
-        border-radius: 1rem;
-        box-shadow: $bs-secondary;
-
-        .MuiTableCell-body {
-          height: 40px;
-          background-color: white;
-          color: $c-black-light;
-          font-size: $fz-table-footer;
-          font-weight: $fw-bold;
-          transition: border 0.1s ease-in-out;
-
-          &.actions-cell-wrapper {
-            text-align: right;
-          }
-
-          &:first-child {
-            border-top-left-radius: 1rem;
-            border-bottom-left-radius: 1rem;
-          }
-          &:last-child {
-            border-top-right-radius: 1rem;
-            border-bottom-right-radius: 1rem;
-          }
-        }
-
-        &:nth-child(odd) {
-          .MuiTableCell-body {
-            background-color: white !important;
-          }
-        }
-
-        &:hover,
-        &.table-row-overlay {
-          .MuiTableCell-body {
-            background-color: $c-primary-lighter !important;
-          }
-        }
-
-        &.has-validation {
-          transition: border, 0.1s ease-in-out;
-          border: 3px solid $c-danger;
-
-          &:first-child {
-            border-bottom: 2px solid $c-danger;
-          }
-        }
-
-        &.is-disabled {
-          .MuiTableCell-body {
-            background-color: $c-gray-lighter !important;
-            color: $c-gray !important;
           }
         }
       }
@@ -188,28 +152,6 @@
           .MuiTableCell-head {
             background-color: $c-primary;
             color: $c-white;
-          }
-        }
-      }
-
-      .MuiTableBody-root {
-        .MuiTableRow-root {
-          .MuiTableCell-body {
-            background-color: $c-white;
-            color: $c-gray-primary;
-          }
-
-          &:nth-child(even) {
-            .MuiTableCell-body {
-              background-color: $c-gray-lightest;
-            }
-          }
-
-          &:hover,
-          &.table-row-overlay {
-            .MuiTableCell-body {
-              background-color: $c-blue-lightest;
-            }
           }
         }
       }
@@ -306,6 +248,228 @@
     @include rtl {
       border-right: 1.5px solid $c-gray-secondary;
       border-left: none;
+    }
+  }
+}
+
+.MuiTableRow-root {
+  .MuiTableCell-body {
+    background-color: $c-white;
+    color: $c-gray-primary;
+  }
+
+  &:nth-child(even) {
+    .MuiTableCell-body {
+      background-color: $c-gray-lightest;
+    }
+  }
+
+  &:hover,
+  &.table-row-overlay {
+    .MuiTableCell-body {
+      background-color: $c-blue-lightest;
+    }
+  }
+}
+
+.MuiTableRow-root {
+  border-radius: 1rem;
+  box-shadow: $bs-secondary;
+
+  .MuiTableCell-body {
+    height: 40px;
+    background-color: white;
+    color: $c-black-light;
+    font-size: $fz-table-footer;
+    font-weight: $fw-bold;
+    transition: border 0.1s ease-in-out;
+
+    @include themify($themes) {
+      background-color: themed('table-row');
+      color: themed('table-row-text');
+    }
+
+    &.actions-cell-wrapper {
+      text-align: right;
+    }
+
+    &:first-child {
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+
+      @include rtl {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+      }
+    }
+    &:last-child {
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+
+      @include rtl {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+      }
+    }
+  }
+
+  &:nth-child(odd) {
+    .MuiTableCell-body {
+      background-color: white;
+
+      @include themify($themes) {
+        background-color: themed('table-row');
+        color: themed('table-row-text');
+      }
+    }
+  }
+
+  &:hover,
+  &.table-row-overlay {
+    .MuiTableCell-body {
+      background-color: $c-primary-lighter;
+
+      @include themify($themes) {
+        background-color: themed('table-row-light');
+      }
+    }
+  }
+
+  &.has-validation {
+    transition: border, 0.1s ease-in-out;
+    border: 3px solid $c-danger;
+
+    &:first-child {
+      border-bottom: 2px solid $c-danger;
+    }
+  }
+
+  &.is-disabled {
+    .MuiTableCell-body {
+      background-color: $c-gray-lighter !important;
+      color: $c-gray !important;
+    }
+  }
+}
+
+.MuiTableCell-root {
+  border-bottom: 0;
+  font-family: $ff-default;
+  white-space: nowrap;
+
+  @include rtl {
+    text-align: right;
+  }
+
+  &[draggable='true'] {
+    cursor: move;
+  }
+
+  &.drag-over-cell {
+    box-shadow: inset 0 0 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem 0.25rem 0 0;
+  }
+}
+
+.MuiTableCell-head {
+  background-color: $c-primary;
+  position: sticky;
+  top: 0;
+  font-size: $fz-table-header;
+  font-weight: bold;
+  font-family: $ff-semibold !important;
+  color: #5b5b5b;
+  z-index: 2 !important;
+  min-width: 10rem;
+  max-width: 10rem;
+
+  &:first-child {
+    min-width: 10.5rem;
+    max-width: 10.5rem;
+  }
+
+  &:nth-child(3) {
+    min-width: 6rem;
+    max-width: 6rem;
+  }
+
+  @include themify($themes) {
+    background-color: themed('table-head');
+  }
+
+  &:first-child {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+
+    @include rtl {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
+  }
+  &:last-child {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
+    @include rtl {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+    }
+  }
+
+  &.actions-cell,
+  &.checkboxes-cell {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+.ReactVirtualized__Grid.ReactVirtualized__List {
+  padding: 0 1.5rem;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+.ReactVirtualized__Grid__innerScrollContainer {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+.table-row-wrapper {
+  width: 100%;
+
+  .MuiTableRow-root {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    @include rtl {
+      flex-direction: row-reverse;
+    }
+
+    @include themify($themes) {
+      background-color: themed('table-row');
+      color: themed('table-row-text');
+    }
+
+    .MuiTableCell-root {
+      border-bottom: none;
+      min-width: 15rem;
+      max-width: 15rem;
+
+      &:nth-child(3) {
+        min-width: 9rem;
+        max-width: 9rem;
+      }
     }
   }
 }

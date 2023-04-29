@@ -7,6 +7,11 @@
   overflow: hidden;
   position: relative;
 
+  @include themify($themes) {
+    background-color: themed('button-color');
+    box-shadow: 0 0 25px 1px rgb(71 98 123 / 26%);
+  }
+
   .search-wrapper {
     padding: 1rem;
     width: 40%;

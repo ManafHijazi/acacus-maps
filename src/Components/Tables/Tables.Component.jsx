@@ -1,18 +1,18 @@
 import React, { useCallback, useState, useRef, memo, useEffect } from 'react';
+import moment from 'moment';
+import i18next from 'i18next';
 import Table from '@mui/material/Table';
+import { List } from 'react-virtualized';
+import TableRow from '@mui/material/TableRow';
+import { useEventListener } from '../../Hooks';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import moment from 'moment';
-import { ButtonBase, TablePagination } from '@mui/material';
-import i18next from 'i18next';
-import { useEventListener } from '../../Hooks';
 import { getDataFromObject } from '../../Helpers';
-import { PaginationComponent } from '../Pagination/Pagination.Component';
+import TableFooter from '@mui/material/TableFooter';
+import TableContainer from '@mui/material/TableContainer';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import { ButtonBase, TablePagination } from '@mui/material';
 import { LoaderComponent } from '../Loader/Loader.Component';
 import { CheckboxesComponent } from '../Checkboxes/Checkboxes.Component';
 import './Tables.Style.scss';
@@ -22,6 +22,7 @@ export const TablesComponent = memo(
     tableRowValidationArray,
     tableOptions,
     data,
+    isScroll,
     headerData,
     footerData,
     sortColumnClicked,
@@ -74,6 +75,7 @@ export const TablesComponent = memo(
     const [currentOrderDirection, setCurrentOrderDirection] = useState('desc');
     const tableRef = useRef(null);
     const [focusedRow, setFocusedRow] = useState(-1);
+
     const descendingComparator = (a, b, orderBy) => {
       if (b[orderBy] < a[orderBy]) return -1;
       if (b[orderBy] > a[orderBy]) return 1;
@@ -259,10 +261,117 @@ export const TablesComponent = memo(
       if (selectedRows) setLocalSelectedRows(selectedRows);
     }, [selectedRows]);
 
+    const list = stableSort(data, getComparator(currentOrderDirection, getSortDataName()))
+      .slice(
+        ((onPageIndexChanged || onPageSizeChanged) && data.length <= pageSize
+          ? 0
+          : pageIndex * pageSize) || 0,
+        ((onPageIndexChanged || onPageSizeChanged) && data.length <= pageSize
+          ? pageSize
+          : pageIndex * pageSize + pageSize) || data.length,
+      )
+      .map((row) => row);
+
+    const renderRow = ({ index, key, style }) => {
+      const isItemSelected = getCurrentSelectedItemIndex(list[index]) !== -1;
+
+      return (
+        <div className='table-row-wrapper' key={key} style={style}>
+          <TableRow
+            aria-checked={
+              (getIsSelectedRow && getIsSelectedRow(list[index], index)) || isItemSelected
+            }
+            tabIndex={-1}
+            selected={(getIsSelectedRow && getIsSelectedRow(list[index], index)) || isItemSelected}
+            id={`${bodyRowRef}${index * (pageIndex + 1)}`}
+            onClick={(event) => {
+              event.stopPropagation();
+              bodyRowClicked(index, list[index]);
+            }}
+            className={index === focusedRow ? 'table-row-overlay' : ''}
+          >
+            {(isWithCheck || getIsSelectedRow || selectedRows) && (
+              <TableCell
+                padding='checkbox'
+                style={(list[index].isSticky && getStickyStyle(list[index])) || undefined}
+              >
+                <CheckboxesComponent
+                  idRef={`tableSelectRef${index + 1}`}
+                  singleChecked={
+                    isSelectAll ||
+                    (getIsSelectedRow && getIsSelectedRow(list[index], index)) ||
+                    isItemSelected ||
+                    false
+                  }
+                  isDisabled={
+                    isSelectAllDisabled ||
+                    (getIsDisabledRow && getIsDisabledRow(list[index], index))
+                  }
+                  onSelectedCheckboxChanged={onSelectCheckboxChangedHandler(list[index], index)}
+                />
+                <div />
+              </TableCell>
+            )}
+            {headerData.length > 0 &&
+              (reorderedHeader || headerData)
+                .filter((column) => !column.isHidden)
+                .map((column, columnIndex) => (
+                  <TableCell
+                    key={`bodyColumn${columnIndex * (pageIndex + 1) + index}`}
+                    className={column.cellClasses || ''}
+                    style={(column.isSticky && getStickyStyle(column)) || undefined}
+                  >
+                    {(column.isDate &&
+                      ((getDataFromObject(list[index], column.input) &&
+                        moment(getDataFromObject(list[index], column.input)).format(
+                          column.dateFormat || tableOptions.dateFormat || dateFormat,
+                        )) ||
+                        '')) ||
+                      (column.component &&
+                        column.component(list[index], index, column, columnIndex)) ||
+                      getDataFromObject(list[index], column.input)}
+                  </TableCell>
+                ))}
+            {isWithTableActions && tableActionsOptions && (
+              <TableCell
+                key={`bodyActionsColumn${index + 1}`}
+                className={`actions-cell-wrapper ${tableActionsOptions.cellClasses || ''}`}
+                style={
+                  (tableActionsOptions.isSticky && getStickyStyle(tableActionsOptions)) || undefined
+                }
+              >
+                {(tableActionsOptions.component &&
+                  tableActionsOptions.component(list[index], index)) ||
+                  (tableActions &&
+                    tableActions.map((item) => (
+                      <ButtonBase
+                        disabled={
+                          (tableActionsOptions &&
+                            tableActionsOptions.getDisabledAction &&
+                            tableActionsOptions.getDisabledAction(list[index], index, item)) ||
+                          isDisabledActions
+                        }
+                        onClick={onActionClickedHandler(item, list[index], index)}
+                        key={`${item.key}-${index + 1}`}
+                        className={`btns mx-1 theme-solid ${item.bgColor || ''}`}
+                      >
+                        <span className={item.icon} />
+                        {item.value}
+                      </ButtonBase>
+                    ))) ||
+                  null}
+              </TableCell>
+            )}
+          </TableRow>
+        </div>
+      );
+    };
+
     return (
       <div className='w-100 table-responsive' ref={tableRef}>
-        <TableContainer>
+        <TableContainer className={`vehicles-table-wrapper ${isScroll ? 'is-scroll' : ''}`}>
           <Table
+            stickyHeader={isScroll}
             className='table-wrapper'
             aria-labelledby='tableTitle'
             size={tableOptions.tableSize} // 'small' or 'medium'
@@ -375,127 +484,7 @@ export const TablesComponent = memo(
                 )}
               </TableRow>
             </TableHead>
-            {!isLoading && (
-              <TableBody>
-                {stableSort(data, getComparator(currentOrderDirection, getSortDataName()))
-                  .slice(
-                    ((onPageIndexChanged || onPageSizeChanged) && data.length <= pageSize
-                      ? 0
-                      : pageIndex * pageSize) || 0,
-                    ((onPageIndexChanged || onPageSizeChanged) && data.length <= pageSize
-                      ? pageSize
-                      : pageIndex * pageSize + pageSize) || data.length,
-                  )
-                  .map((row, rowIndex) => {
-                    const isItemSelected = getCurrentSelectedItemIndex(row) !== -1;
-
-                    return (
-                      <React.Fragment key={`bodyRow${rowIndex * (pageIndex + 1)}`}>
-                        <TableRow
-                          role='checkbox'
-                          aria-checked={
-                            (getIsSelectedRow && getIsSelectedRow(row, rowIndex)) || isItemSelected
-                          }
-                          tabIndex={-1}
-                          selected={
-                            (getIsSelectedRow && getIsSelectedRow(row, rowIndex)) || isItemSelected
-                          }
-                          id={`${bodyRowRef}${rowIndex * (pageIndex + 1)}`}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            bodyRowClicked(rowIndex, row);
-                          }}
-                          className={rowIndex === focusedRow ? 'table-row-overlay' : ''}
-                        >
-                          {(isWithCheck || getIsSelectedRow || selectedRows) && (
-                            <TableCell
-                              padding='checkbox'
-                              style={(row.isSticky && getStickyStyle(row)) || undefined}
-                            >
-                              <CheckboxesComponent
-                                idRef={`tableSelectRef${rowIndex + 1}`}
-                                singleChecked={
-                                  isSelectAll ||
-                                  (getIsSelectedRow && getIsSelectedRow(row, rowIndex)) ||
-                                  isItemSelected ||
-                                  false
-                                }
-                                isDisabled={
-                                  isSelectAllDisabled ||
-                                  (getIsDisabledRow && getIsDisabledRow(row, rowIndex))
-                                }
-                                onSelectedCheckboxChanged={onSelectCheckboxChangedHandler(
-                                  row,
-                                  rowIndex,
-                                )}
-                              />
-                              <div />
-                            </TableCell>
-                          )}
-                          {headerData.length > 0 &&
-                            (reorderedHeader || headerData)
-                              .filter((column) => !column.isHidden)
-                              .map((column, columnIndex) => (
-                                <TableCell
-                                  key={`bodyColumn${columnIndex * (pageIndex + 1) + rowIndex}`}
-                                  className={column.cellClasses || ''}
-                                  style={(column.isSticky && getStickyStyle(column)) || undefined}
-                                >
-                                  {(column.isDate &&
-                                    ((getDataFromObject(row, column.input) &&
-                                      moment(getDataFromObject(row, column.input)).format(
-                                        column.dateFormat || tableOptions.dateFormat || dateFormat,
-                                      )) ||
-                                      '')) ||
-                                    (column.component &&
-                                      column.component(row, rowIndex, column, columnIndex)) ||
-                                    getDataFromObject(row, column.input)}
-                                </TableCell>
-                              ))}
-                          {isWithTableActions && tableActionsOptions && (
-                            <TableCell
-                              key={`bodyActionsColumn${rowIndex + 1}`}
-                              className={`actions-cell-wrapper ${
-                                tableActionsOptions.cellClasses || ''
-                              }`}
-                              style={
-                                (tableActionsOptions.isSticky &&
-                                  getStickyStyle(tableActionsOptions)) ||
-                                undefined
-                              }
-                            >
-                              {(tableActionsOptions.component &&
-                                tableActionsOptions.component(row, rowIndex)) ||
-                                (tableActions &&
-                                  tableActions.map((item) => (
-                                    <ButtonBase
-                                      disabled={
-                                        (tableActionsOptions &&
-                                          tableActionsOptions.getDisabledAction &&
-                                          tableActionsOptions.getDisabledAction(
-                                            row,
-                                            rowIndex,
-                                            item,
-                                          )) ||
-                                        isDisabledActions
-                                      }
-                                      onClick={onActionClickedHandler(item, row, rowIndex)}
-                                      key={`${item.key}-${rowIndex + 1}`}
-                                      className={`btns mx-1 theme-solid ${item.bgColor || ''}`}
-                                    >
-                                      <span className={item.icon} />
-                                      {item.value}
-                                    </ButtonBase>
-                                  ))) ||
-                                null}
-                            </TableCell>
-                          )}
-                        </TableRow>
-                      </React.Fragment>
-                    );
-                  })}
-              </TableBody>
-            )}
+            {!isLoading && <TableBody></TableBody>}
             {footerData && footerData.length > 0 && (
               <TableFooter className='footer-wrapper'>
                 <TableRow>
@@ -509,6 +498,15 @@ export const TablesComponent = memo(
             )}
           </Table>
         </TableContainer>
+
+        <List
+          width={700}
+          height={600}
+          rowHeight={60}
+          overscanRowCount={3}
+          rowCount={data.length}
+          rowRenderer={renderRow}
+        />
         <LoaderComponent
           isLoading={isLoading}
           isSkeleton

@@ -59,3 +59,75 @@ $bg-gradient-primary-right: linear-gradient(to right, $c-primary 0%, $c-primary-
 $bg-gradient-primary-left: linear-gradient(to left, $c-primary 0%, $c-primary-dark 100%);
 $bg-gradient-primary-top: linear-gradient(to top, $c-primary 0%, $c-primary-dark 100%);
 $bg-gradient-primary-bottom: linear-gradient(to bottom, $c-primary 0%, $c-primary-dark 100%);
+
+$themes: (
+  light: (
+    c-primary-dark: #763b01,
+    c-primary-darker: #763b01,
+    c-primary-opacity: #fbb03bb0,
+    c-primary: #fbb03b,
+    c-primary-light: #fac46e,
+    c-primary-lighter: #fff5e4,
+    c-primary-lightest: #fffaf2,
+    c-secondary: #e27200,
+    c-secondary-opacity: #e2710083,
+    c-secondary-light: #dd8833,
+    body-background: #fefeff,
+    c-gray-dark: #4b4b4b,
+    button-color: #ffffff,
+    button-color-dark: #fff5e4,
+    box-shadow: 0px 0 25px 1px rgba(145, 158, 171, 0.264),
+    side-button: #552b00,
+    table-head: #fbb03b,
+    input-color: #f0f0f0,
+    input-text-color: #838383,
+  ),
+  dark: (
+    c-primary-dark: #fcb600,
+    c-primary-darker: #133b5c,
+    c-primary-opacity: rgba(251, 176, 59, 0.5),
+    c-primary: #fbb03b,
+    c-primary-light: #fac46e,
+    c-primary-lighter: #fff5e4,
+    c-primary-lightest: #fffaf2,
+    c-secondary: #e89c45,
+    c-secondary-opacity: rgba(232, 156, 69, 0.5),
+    c-secondary-light: #dd8833,
+    body-background: #16223d,
+    c-gray-dark: #838383,
+    button-color: #133b5c,
+    button-color-dark: #1e5f74,
+    box-shadow: 0 0 0 0 transparent,
+    side-button: #fffaf2,
+    table-head: #16223d,
+    input-color: #16223d,
+    input-text-color: #e6e6e6,
+    table-row: #1e5f74,
+    table-row-light: #498ca3,
+    table-row-text: #fffaf2,
+    login-card: #133b5c9c,
+  ),
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

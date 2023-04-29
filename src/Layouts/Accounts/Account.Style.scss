@@ -30,9 +30,19 @@
     align-items: flex-start;
     justify-content: center;
 
+    @include themify($themes) {
+      background-color: themed('login-card');
+    }
+
     &.is-change-password {
       height: 28rem;
       min-height: 28rem;
+    }
+
+    .theme-button-wrapper {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
     }
 
     .card-title {
@@ -42,6 +52,15 @@
       font-family: $ff-bold;
       font-size: 26px;
       padding-bottom: 0.5rem;
+
+      @include rtl {
+        padding-left: 0;
+        padding-right: 4rem;
+      }
+
+      @include themify($themes) {
+        color: themed('c-primary');
+      }
     }
 
     .card-subtitle {
@@ -51,6 +70,15 @@
       padding-bottom: 2rem;
       max-width: 25rem;
       text-align: center;
+
+      @include rtl {
+        padding-left: 0;
+        padding-right: 4rem;
+      }
+
+      @include themify($themes) {
+        color: themed('c-primary-lighter');
+      }
     }
 
     .login-actions-wrapper {
@@ -59,6 +87,11 @@
       justify-content: space-between;
       padding-bottom: 2rem;
       padding-left: 0.5rem;
+
+      @include rtl {
+        padding-left: 0;
+        padding-right: 0.5rem;
+      }
 
       .MuiButtonBase-root {
         font-size: 12px;
@@ -107,13 +140,17 @@
       .MuiButtonBase-root {
         width: 100%;
         padding: 0.8rem;
-        background-color: $c-primary-dark;
         color: $c-white;
         text-transform: capitalize;
         border-radius: 0.5rem;
         font-size: 14px;
         font-weight: bold;
         font-family: $ff-semibold;
+
+        @include themify($themes) {
+          background-color: themed('button-color-dark');
+          color: themed('input-text-color');
+        }
 
         &:disabled {
           background-color: $c-gray;

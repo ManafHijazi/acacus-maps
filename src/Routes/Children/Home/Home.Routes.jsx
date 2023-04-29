@@ -9,7 +9,7 @@ const HomeRoutes = [
   {
     id: 1,
     path: '/map-page',
-    name: 'Maps',
+    name: 'maps',
     component: MapPageView,
     layout: '/home',
     default: true,
@@ -26,7 +26,7 @@ const HomeRoutes = [
   {
     id: 2,
     path: '/vehicles-page',
-    name: 'Vehicles',
+    name: 'vehicles',
     component: VehiclesPageView,
     layout: '/home',
     default: true,

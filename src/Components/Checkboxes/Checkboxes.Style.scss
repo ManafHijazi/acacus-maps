@@ -28,6 +28,10 @@
     .MuiSvgIcon-root {
       path {
         fill: $c-primary-dark;
+
+        @include themify($themes) {
+          fill: themed('input-text-color');
+        }
       }
     }
 
@@ -37,6 +41,11 @@
       .fas {
         color: $c-white;
         background-color: $c-primary-dark;
+
+        @include themify($themes) {
+          color: themed('input-text-color');
+          background-ccolor: themed('input-text-color');
+        }
       }
     }
 
@@ -59,6 +68,10 @@
       width: 19px;
       border: 2px solid $c-primary-dark;
       border-radius: 0.25rem;
+
+      @include themify($themes) {
+        border: 2px solid themed('input-text-color');
+      }
     }
 
     .PrivateSwitchBase-root-5 {
@@ -75,6 +88,10 @@
       .MuiSvgIcon-root {
         path {
           fill: $c-primary-dark;
+
+          @include themify($themes) {
+            fill: themed('input-text-color');
+          }
         }
       }
 

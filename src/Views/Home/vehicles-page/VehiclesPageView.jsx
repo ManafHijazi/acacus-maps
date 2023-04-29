@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { showError } from 'Helpers';
+import { useTranslation } from 'react-i18next';
 import { Inputs, TablesComponent } from 'Components';
 import { GetAllVehicleTelemetriesService } from 'Services';
 import './VehiclesPageView.scss';
 
 const VehiclesPageView = () => {
+  const { t } = useTranslation('Shared');
   const [timer, setTimer] = useState(null);
   const [vehicles, setVehicles] = useState([]);
   const [localSearchValue, setLocalSearchValue] = useState('');
@@ -14,16 +16,16 @@ const VehiclesPageView = () => {
     pageSize: 10,
   });
 
-  const onPageIndexChanged = (event, newIndex) => {
-    setFilter((items) => ({ ...items, page: +newIndex }));
-  };
+  // const onPageIndexChanged = (event, newIndex) => {
+  //   setFilter((items) => ({ ...items, page: +newIndex }));
+  // };
 
-  const onPageSizeChanged = (event) => {
-    const { value } = event.target;
+  // const onPageSizeChanged = (event) => {
+  //   const { value } = event.target;
 
-    setFilter((items) => ({ ...items, pageSize: +value }));
-    setFilter((items) => ({ ...items, page: 0 }));
-  };
+  //   setFilter((items) => ({ ...items, pageSize: +value }));
+  //   setFilter((items) => ({ ...items, page: 0 }));
+  // };
 
   const getAllVehicleTelemetriesService = useCallback(async () => {
     const response = await GetAllVehicleTelemetriesService({
@@ -34,7 +36,7 @@ const VehiclesPageView = () => {
 
       if (telemetries) setVehicles(telemetries);
     } else {
-      showError((response && response.data) || 'Failed to get vehicles');
+      showError((response && response.data && response.data.message) || 'Failed to get vehicles');
     }
   }, []);
 
@@ -45,9 +47,9 @@ const VehiclesPageView = () => {
   return (
     <div className='vehicles-wrapper view-wrapper'>
       <Inputs
-        inputPlaceholder='Search'
         value={localSearchValue}
         idRef='vehiclesSearchInputId'
+        inputPlaceholder={t('search')}
         wrapperClasses='search-wrapper'
         startAdornment={<span className='mdi mdi-magnify' />}
         onInputChanged={(event) => {
@@ -63,49 +65,51 @@ const VehiclesPageView = () => {
       />
 
       <TablesComponent
+        isScroll
         headerData={[
           {
             id: 1,
-            label: 'Name',
+            label: t('name'),
             input: 'name',
             isSortable: true,
           },
           {
             id: 2,
-            label: 'PlateNo',
+            label: t('plate-no'),
             input: 'plateNo',
             isSortable: true,
           },
           {
             id: 3,
-            label: 'Speed',
+            label: t('speed'),
             input: 'speed',
             isSortable: true,
           },
           {
             id: 4,
-            label: 'Time',
+            label: t('time'),
             input: 'timestamp',
             isDate: true,
             isSortable: true,
           },
           {
             id: 5,
-            label: 'Power Supply Voltage',
+            label: t('power-supply-voltage'),
             input: 'powerSupplyVoltage',
             isSortable: true,
           },
           {
             id: 6,
-            label: 'Engine Status',
+            label: t('engine-status'),
             input: 'engineStatus',
             isSortable: true,
           },
         ]}
-        pageIndex={filter.page || 0}
-        pageSize={filter.pageSize || 0}
-        onPageSizeChanged={onPageSizeChanged}
-        onPageIndexChanged={onPageIndexChanged}
+        // pageIndex={filter.page || 0}
+        // onPageSizeChanged={onPageSizeChanged}
+        // onPageIndexChanged={onPageIndexChanged}
+        // totalItems={(vehicles && vehicles.length) || 0}
+        pageSize={(vehicles && vehicles.length) || 0}
         data={
           (vehicles && filter.query
             ? vehicles.filter((item) =>
@@ -113,7 +117,6 @@ const VehiclesPageView = () => {
               )
             : vehicles) || []
         }
-        totalItems={(vehicles && vehicles.length) || 0}
       />
     </div>
   );

@@ -12,13 +12,19 @@
     padding-bottom: 0.5rem;
     font-weight: bold;
     font-family: $ff-extrabold;
-    color: $c-primary-dark;
+
+    @include themify($themes) {
+      color: themed('c-primary-dark');
+    }
   }
 
   .header-subtitle {
     font-size: 16px;
-    color: $c-gray-dark;
     padding-left: 0.3rem;
+
+    @include themify($themes) {
+      color: themed('c-gray-dark');
+    }
   }
 
   .header-btns {
@@ -28,14 +34,23 @@
     .notifications-btn-wrapper {
       padding-right: 1rem;
 
+      @include rtl {
+        padding-right: 0;
+        padding-left: 1rem;
+      }
+
       .MuiButtonBase-root {
         box-shadow: $bs-primary;
         border-radius: 1rem;
-        background-color: $c-white;
         padding: 0.5rem;
         color: $c-yellow !important;
         width: 3.5rem;
         height: 3.5rem;
+
+        @include themify($themes) {
+          background-color: themed('button-color');
+          box-shadow: themed('box-shadow');
+        }
       }
 
       .mdi::before {
@@ -46,14 +61,22 @@
     .cog-btn-wrapper {
       padding-right: 1rem;
 
+      @include rtl {
+        padding-left: 1rem;
+      }
+
       .MuiButtonBase-root {
         box-shadow: $bs-primary;
         border-radius: 1rem;
-        background-color: $c-white;
         color: $c-info !important;
         padding: 0.5rem;
         width: 3.5rem;
         height: 3.5rem;
+
+        @include themify($themes) {
+          background-color: themed('button-color');
+          box-shadow: themed('box-shadow');
+        }
       }
 
       .mdi::before {
@@ -65,15 +88,21 @@
       .MuiButtonBase-root {
         box-shadow: $bs-primary;
         border-radius: 100%;
-        background-color: $c-white;
-        color: $c-primary;
         padding: 0.5rem;
         width: 3.5rem;
         height: 3.5rem;
+
+        @include themify($themes) {
+          background-color: themed('button-color');
+          color: themed('c-primary');
+          box-shadow: themed('box-shadow');
+        }
       }
 
       .MuiAvatar-root {
-        background-color: $c-primary;
+        @include themify($themes) {
+          background-color: themed('c-primary');
+        }
       }
     }
   }

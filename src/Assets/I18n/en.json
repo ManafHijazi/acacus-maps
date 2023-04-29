@@ -1,1 +1,29 @@
-{}
+{
+  "LanguageChangeComponent": {
+    "ar": "العربية",
+    "en": "English"
+  },
+  "acacus": "Acacus",
+  "acacus-maps": "Acacus Maps",
+  "email": "Email",
+  "engine-status": "Engine Status",
+  "hi": "Hi",
+  "login-msg": "Please login to start using the system",
+  "logout": "Logout",
+  "maps": "Maps",
+  "name": "Name",
+  "odometer": "Odometer",
+  "password": "Password",
+  "plate-no": "PlateNo",
+  "power-supply-voltage": "Power Supply Voltage",
+  "remember-me": "Remember Me",
+  "search": "Search",
+  "sign-in": "Sign in",
+  "signing-in": "Signing in...",
+  "speed": "Speed",
+  "time": "Time",
+  "vehicles": "Vehicles",
+  "vin": "VIN",
+  "welcome-back": "Welcome back",
+  "welcome-to-acacus-maps": "Welcome To Acacus Maps"
+}

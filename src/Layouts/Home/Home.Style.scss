@@ -5,6 +5,10 @@
   position: relative;
   width: 100%;
 
+  @include themify($themes) {
+    background: themed('body-background');
+  }
+
   .container-wrapper {
     padding: 2rem;
     min-height: 100vh;

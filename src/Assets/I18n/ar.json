@@ -1,1 +1,29 @@
-{}
+{
+  "LanguageChangeComponent": {
+    "ar": "العربية",
+    "en": "الانجليزية"
+  },
+  "acacus": "أكاكوس",
+  "acacus-maps": "خرائط أكاكوس",
+  "email": "بريد إلكتروني",
+  "engine-status": "حالة المحرك",
+  "hi": "أهلاً",
+  "login-msg": "الرجاء تسجيل الدخول لبدء استخدام النظام",
+  "logout": "تسجيل خروج",
+  "maps": "خرائط",
+  "name": "اسم",
+  "odometer": "عداد المسافات",
+  "password": "كلمة المرور",
+  "plate-no": "رقم لوحة",
+  "power-supply-voltage": "جهد مزود الطاقة",
+  "remember-me": "تذكرنى",
+  "search": "بحث",
+  "sign-in": "تسجيل الدخول",
+  "signing-in": "تسجيل الدخول...",
+  "speed": "سرعة",
+  "time": "وقت",
+  "vehicles": "مركبات",
+  "vin": "VIN",
+  "welcome-back": "مرحبًا بعودتك",
+  "welcome-to-acacus-maps": "مرحبًا بك في خرائط أكاكوس"
+}

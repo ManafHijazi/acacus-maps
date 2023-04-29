@@ -11,7 +11,13 @@
   background-color: $c-primary-dark;
   transition: all 0.18s ease-in-out;
   color: $c-primary-lighter;
-  box-shadow: 0px 0 24px 5px rgba(145, 158, 171, 0.396);
+  box-shadow: 0 0 24px 5px rgba(145, 158, 171, 0.396);
+
+  @include themify($themes) {
+    background-color: themed('c-primary-darker');
+    color: themed('c-primary-lighter');
+    box-shadow: 0 0 0 0 transparent;
+  }
 
   .MuiTouchRipple-root {
     margin: 0 !important;
@@ -24,6 +30,10 @@
     opacity: 0;
     color: $c-primary-lighter;
     transition: all 0.18s ease-in-out;
+
+    @include rtl {
+      padding-right: 0.5rem;
+    }
   }
 
   &.is-open {
@@ -56,6 +66,10 @@
         .item-name {
           opacity: 1;
           transition: opacity 0.18s ease-in-out;
+
+          @include rtl {
+            padding-right: 1rem;
+          }
         }
 
         .MuiButtonBase-root {
@@ -80,6 +94,15 @@
 
             span {
               color: $c-primary;
+            }
+
+            @include themify($themes) {
+              background-color: themed('button-color-dark');
+              color: themed('side-button');
+
+              span {
+                color: themed('side-button');
+              }
             }
           }
         }
@@ -117,6 +140,19 @@
             span {
               color: $c-primary;
             }
+
+            @include themify($themes) {
+              background-color: themed('button-color-dark');
+              color: themed('side-button');
+
+              .item-name {
+                color: themed('side-button');
+              }
+
+              span {
+                color: themed('side-button');
+              }
+            }
           }
         }
 
@@ -129,6 +165,10 @@
           padding: 0.5rem;
           border-bottom-left-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
+
+          @include themify($themes) {
+            background-color: themed('button-color-dark');
+          }
         }
 
         .MuiAccordionSummary-root {
@@ -164,6 +204,10 @@
           opacity: 1;
           min-width: 10rem;
           transition: opacity 0.18s ease-in-out;
+
+          @include themify($themes) {
+            color: themed('c-primary-lightest');
+          }
         }
 
         .MuiButtonBase-root {
@@ -191,22 +235,48 @@
             span {
               color: $c-primary;
             }
+
+            @include themify($themes) {
+              background-color: themed('button-color-dark');
+              color: themed('side-button');
+
+              span {
+                color: themed('side-button');
+              }
+            }
           }
         }
 
         span {
           color: $c-primary-lighter;
           margin-right: 1rem;
+
+          @include rtl {
+            margin-right: 0;
+            margin-left: 1rem;
+          }
+
+          @include themify($themes) {
+            color: #fff5e4;
+          }
         }
 
         &.is-active {
           .MuiPaper-root {
             background-color: white !important;
+
+            @include themify($themes) {
+              background-color: themed('button-color-dark');
+            }
           }
           .item-name {
             color: $c-primary-dark;
             opacity: 1;
             transition: opacity 0.18s ease-in-out;
+
+            @include themify($themes) {
+              color: themed('side-button');
+            }
           }
 
           .MuiButtonBase-root {
@@ -218,6 +288,20 @@
             span {
               color: $c-primary;
               margin-right: 1rem;
+
+              @include rtl {
+                margin-right: 0;
+                margin-left: 1rem;
+              }
+            }
+
+            @include themify($themes) {
+              background-color: themed('button-color-dark');
+              color: themed('side-button');
+
+              span {
+                color: themed('side-button');
+              }
             }
           }
         }
@@ -227,11 +311,19 @@
         .side-menu-signout-btn {
           .MuiButtonBase-root {
             padding: 0.7rem 0.6rem;
+
+            @include rtl {
+              padding-right: 0;
+            }
           }
 
           .item-name {
             opacity: 0;
             transition: opacity 0.18s ease-in-out;
+
+            @include rtl {
+              padding-right: 0;
+            }
           }
         }
         .side-menu-item {
@@ -250,12 +342,21 @@
               background-color: $c-primary-lightest;
               color: $c-primary-dark;
               transition: background-color 0.18s ease-in-out;
+
+              @include themify($themes) {
+                background-color: themed('button-color-dark');
+                color: themed('button-color');
+              }
             }
           }
 
           &.is-active {
             .MuiButtonBase-root {
               background-color: $c-primary-lighter;
+
+              @include themify($themes) {
+                background-color: themed('button-color-dark');
+              }
             }
           }
         }
@@ -276,6 +377,11 @@
 
           span {
             margin-right: 0.5rem !important;
+
+            @include rtl {
+              margin-right: 0;
+              margin-left: 0.5rem;
+            }
           }
 
           .subitem-name {
@@ -295,6 +401,10 @@
         &.is-closed {
           span {
             margin-right: 0 !important;
+
+            @include rtl {
+              margin-left: 0 !important;
+            }
           }
 
           .MuiButtonBase-root {
@@ -318,6 +428,11 @@
     padding-left: 1rem;
     padding-top: 1.3rem;
     padding-bottom: 1.5rem;
+
+    @include rtl {
+      padding-left: 0;
+      padding-right: 1rem;
+    }
   }
 
   #nav-icon {

@@ -13,3 +13,4 @@ export * from './Pagination/Pagination.Component';
 export * from './Tables/Tables.Component';
 export * from './Checkboxes/Checkboxes.Component';
 export * from './Uploader/Uploader.Component';
+export * from './LanguageChange/LanguageChange.Component';

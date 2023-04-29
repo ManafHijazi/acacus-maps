@@ -137,7 +137,11 @@
         .MuiInputBase-root {
           min-height: 46px;
           width: 100%;
-          background-color: $c-gray-lighter !important;
+
+          @include themify($themes) {
+            background-color: themed('input-color') !important;
+          }
+
           color: $c-gray-primary;
           border-radius: 0.3rem;
           @include d-flex-center;
@@ -283,6 +287,11 @@
           @include d-flex-v-center-h-between;
           flex-wrap: nowrap;
 
+          @include themify($themes) {
+            background-color: themed('input-color');
+            color: themed('input-text-color');
+          }
+
           .end-adornment-wrapper,
           .start-adornment-wrapper {
             @include d-inline-flex-center;
@@ -329,12 +338,20 @@
           width: 100% !important;
           padding: 0.25rem 1rem !important;
 
+          @include themify($themes) {
+            color: themed('input-text-color');
+          }
+
           &::placeholder {
             color: $c-gray-dark;
             opacity: 0.8;
             font-size: 12px;
             font-weight: bold;
             font-family: $ff-semibold;
+
+            @include themify($themes) {
+              color: themed('input-text-color');
+            }
           }
         }
       }

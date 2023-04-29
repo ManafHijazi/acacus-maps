@@ -17,7 +17,7 @@ const HomeLayout = () => {
 
   let localHomeRoutes = HomeRoutes.filter(
     (item) =>
-      userData && userData.roles && userData.roles.some((el) => item.roles.includes(el.role_name))
+      userData && userData.roles && userData.roles.some((el) => item.roles.includes(el.role_name)),
   );
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const HomeLayout = () => {
 
     if (defaultRouteIndex === -1)
       localHomeRoutes = localHomeRoutes.map((item, index) =>
-        index === 0 ? { ...item, default: true } : item
+        index === 0 ? { ...item, default: true } : item,
       );
   }, [localHomeRoutes]);
 

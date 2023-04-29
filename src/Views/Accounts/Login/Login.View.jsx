@@ -2,10 +2,12 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { LoginService } from 'Services';
 import { ButtonBase } from '@mui/material';
 import { LoginActions } from 'Store/Actions';
-import { Inputs, CheckboxesComponent } from '../../../Components';
+import { useTranslation } from 'react-i18next';
 import { GlobalHistory, SetGlobalTokenReducer } from '../../../Helpers';
+import { Inputs, CheckboxesComponent, LanguageChangeComponent } from '../../../Components';
 
 const LoginView = () => {
+  const { t } = useTranslation('Shared');
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(false);
@@ -92,14 +94,14 @@ const LoginView = () => {
   return (
     <div className='login-wrapper'>
       <div className='login-wrapper-card'>
-        <div className='card-title'>Acacus Maps</div>
-        <div className='card-subtitle'>Please login to start using the system</div>
+        <div className='card-title'>{t('acacus-maps')}</div>
+        <div className='card-subtitle'>{t('login-msg')}</div>
         <div className='login-card-body'>
           <Inputs
-            idRef='loginEmailInputId'
             value={state.email}
             wrapperClasses='mb-3'
-            inputPlaceholder='Email'
+            idRef='loginEmailInputId'
+            inputPlaceholder={t('email')}
             onInputChanged={(event) => {
               const { value } = event.target;
               setState((items) => ({ ...items, email: value }));
@@ -109,10 +111,10 @@ const LoginView = () => {
             }}
           />
           <Inputs
-            idRef='loginPasswordInputId'
             wrapperClasses='mb-2'
             value={state.password}
-            inputPlaceholder='Password'
+            idRef='loginPasswordInputId'
+            inputPlaceholder={t('password')}
             type={isShowPassword ? 'text' : 'password'}
             onInputChanged={(event) => {
               const { value } = event.target;
@@ -142,17 +144,18 @@ const LoginView = () => {
           />
           <div className='login-actions-wrapper'>
             <CheckboxesComponent
+              label={t('remember-me')}
               idRef='rememberMeLoginRefId'
               singleChecked={isRememberMe}
-              label='Remember Me'
               onSelectedCheckboxChanged={() => {
                 setIsRememberMe((item) => !item);
               }}
             />
+            <LanguageChangeComponent />
           </div>
           <div className='login-button-wrapper'>
             <ButtonBase id='loginSigninBtnId' onClick={handleLogin}>
-              {isLoginLoading ? 'Signing in ...' : 'Sign in'}
+              {isLoginLoading ? t('signing-in') : t('sign-in')}
             </ButtonBase>
           </div>
         </div>

@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   display: flex;
   background-color: transparent !important;
+
   &.is-reversed-section {
     flex-direction: row-reverse;
   }
@@ -31,6 +32,7 @@
     }
     flex-wrap: wrap;
     color: $c-gray-primary;
+
     .pagination-input {
       max-width: 70px;
       margin-bottom: 0.5rem;
@@ -39,6 +41,10 @@
       }
       .text-field-wrapper .inputs .MuiInputBase-input {
         color: $c-secondary;
+
+        @include themify($themes) {
+          color: themed('table-row-text');
+        }
         text-align: center;
       }
     }
@@ -47,5 +53,16 @@
   .details-wrapper {
     display: flex;
     align-items: center;
+  }
+}
+.MuiTablePagination-root {
+  @include themify($themes) {
+    color: themed('table-row-text');
+  }
+
+  .MuiSvgIcon-root {
+    @include themify($themes) {
+      color: themed('table-row-text');
+    }
   }
 }

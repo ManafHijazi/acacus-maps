@@ -1,16 +1,18 @@
 import React from 'react';
 import { storageService } from 'utils';
+import { LogoutService } from 'Services';
 import { LoginActions } from 'Store/Actions';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GlobalHistory } from '../../../../Helpers/Middleware.Helper';
 import { removeAllPendingRequestsRecordHttp, showError, showSuccess } from 'Helpers';
 import { Accordion, AccordionDetails, AccordionSummary, ButtonBase, Tooltip } from '@mui/material';
 import './SideMenu.Style.scss';
-import { LogoutService } from 'Services';
 
 export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOpenClose }) => {
   const location = useLocation();
+  const { t } = useTranslation('Shared');
   const isRouteActive = (path) => location.pathname.includes(path);
 
   const [expanded, setExpanded] = React.useState(false);
@@ -31,8 +33,6 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
     const response = await LogoutService();
 
     if (response) {
-      showSuccess('Logged out Successfully');
-
       LoginActions.logout();
       storageService.clearLocalStorage();
 
@@ -72,7 +72,7 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
             <span></span>
             <span></span>
           </div>
-          <div className='side-menu-title'>Acacus</div>
+          <div className='side-menu-title'>{t('acacus')}</div>
         </div>
 
         <div className='side-menu-title-wrapper'></div>
@@ -84,7 +84,7 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
                 key={`side-menu-item-${item.id}-${index + 1}`}
                 className={`side-menu-item ${isRouteActive(item.path) ? 'is-active' : ''}`}
               >
-                <Tooltip title={`${isSideMenuOpen ? '' : item.name}`} placement='right'>
+                <Tooltip title={`${isSideMenuOpen ? '' : t(item.name)}`} placement='right'>
                   <Accordion
                     onClick={() => GlobalHistory.push(`${item.layout}${item.path}`)}
                     expanded={
@@ -100,7 +100,7 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
                     >
                       <div className='item-info'>
                         <span className={`mdi mdi-${item.icon}`} />
-                        <div className='item-name'>{item.name}</div>
+                        <div className='item-name'>{t(item.name)}</div>
                       </div>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -119,7 +119,7 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
                               }}
                             >
                               <span className={`mdi mdi-${el.icon}`} />
-                              <div className='subitem-name'>{el.name}</div>
+                              <div className='subitem-name'>{t(el.name)}</div>
                             </ButtonBase>
                           ))}
                       </div>
@@ -130,10 +130,10 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
             ))}
 
             <div className='side-menu-signout-btn'>
-              <Tooltip title={`${isSideMenuOpen ? '' : 'Logout'}`} placement='right'>
+              <Tooltip title={`${isSideMenuOpen ? '' : t('logout')}`} placement='right'>
                 <ButtonBase onClick={logoutHandler}>
                   <span className='mdi mdi-logout mr-3' />
-                  <div className='item-name'>Logout</div>
+                  <div className='item-name'>{t('logout')}</div>
                 </ButtonBase>
               </Tooltip>
             </div>

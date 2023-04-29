@@ -11,15 +11,15 @@ import { ToastProvider } from 'react-toast-notifications';
 import './Assets/Styles/Master.Style.scss';
 
 ReactDOM.render(
-  <I18nextProvider i18n={i18next}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <I18nextProvider i18n={i18next}>
       <ToastProvider placement='top-center'>
         <App />
       </ToastProvider>
-    </Provider>
+    </I18nextProvider>
     <ToastContainer />
-  </I18nextProvider>,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

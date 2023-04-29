@@ -1,3 +1,5 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
 .language-change-wrapper {
   .language-change-btn {
     margin: 0 !important;
@@ -11,6 +13,7 @@
 .language-change-popover-wrapper {
   .MuiPopover-paper {
     max-width: 125px;
+    border-radius: 0.5rem;
   }
 
   .language-change-items-wrapper {
@@ -19,6 +22,12 @@
       margin: 0 !important;
       padding: 0.5rem 1rem;
       justify-content: flex-start;
+      color: #133b5c;
+
+      @include themify($themes) {
+        background-color: themed('button-color');
+        color: white;
+      }
 
       img {
         width: 26px;
